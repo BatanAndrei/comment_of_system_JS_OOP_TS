@@ -119,7 +119,7 @@ let select = function() {
             body: commentBody.value,
             time: Math.floor(Date.now() / 1000),
             nameSend: 'Максим Авдеенко',
-            photoSend: './images/Max.png',
+            photoSend: './images/Jun.png',
             like: true,
             favoriteOn: 'В избранном',
             //nameAnswer: 'Алексей_1994b',
@@ -151,20 +151,23 @@ let select = function() {
 
     function saveComments() {     
             localStorage.setItem('comments', JSON.stringify(comments));
-            localStorage.setItem('addFavorites', JSON.stringify(addFavorites));                       // сохраняем в Local  
+            localStorage.setItem('addFavorites', JSON.stringify(addFavorites));                      // сохраняем в Local  
     };
 
     function localComments() {                                  // отображаем из Local
         if(localStorage.getItem('comments')) {
             comments = JSON.parse(localStorage.getItem('comments'));
-            addFavorites = JSON.parse(localStorage.getItem('addFavorites'));
         }
-        showComments();
+         if(localStorage.getItem('addFavorites')) {
+            addFavorites = JSON.parse(localStorage.getItem('addFavorites'));
+        } 
         toggleHeart();
+        showComments();
+        
     };
     
-    localComments();
-
+    localComments()
+    
 
     function showComments() {                                    // рисуем отправленный коммент
         let resultComment = document.getElementById('result-comment');
@@ -248,9 +251,9 @@ let select = function() {
         document.addEventListener("click", function(event) {
             let favoriteBtn = event.target.closest("#favoriteBtn");
             
-            favoriteBtn.classList.toggle(".toggleHeart");
+            favoriteBtn.classList.toggle("toggleHeart");
            
-            if(favoriteBtn.classList.contains(".toggleHeart")) {
+            if(favoriteBtn.classList.contains("toggleHeart")) {
 
             favoriteBtn.innerHTML = 
         `<button class="button-bordernone">
@@ -272,8 +275,9 @@ let select = function() {
             </svg>
         </button>
         <h3 class="toolbar-sent_text">${item.favoriteOn}</h3>`;  
+        
 
-            }else if(!favoriteBtn.classList.contains(".toggleHeart")){
+            }else if(!favoriteBtn.classList.contains("toggleHeart")){
 
                 favoriteBtn.innerHTML =
             `<button class="button-bordernone">
