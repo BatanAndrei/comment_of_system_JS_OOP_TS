@@ -177,8 +177,9 @@ let select = function() {
                             ${paintHeart(item.like)}
                        </div>
                        
+
                        <div class="rating-plus">
-                       <button class="button-bordernone btn__rating-plus" data-plus>
+                       <button class="button-bordernone btn__rating-plus">
                            <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                            <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
@@ -191,13 +192,15 @@ let select = function() {
                        
 
                        <div class="rating-minus">
-                       <button class="button-bordernone btn__rating-minus" data-minus>
+                       <button class="button-bordernone btn__rating-minus">
                            <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                            <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
                        </svg>
                        </button>
                        </div>
+
+
                     </div>
                    </div>`; 
         });         
@@ -301,7 +304,7 @@ function changeRating() {
     let indexRating = document.querySelector('.toolbar-sent_text-rating');
     const indRat = indexRating.getAttribute('data-index-change');
 
-    document.querySelectorAll('.rating-plus').forEach(function(item) {
+     document.querySelectorAll('.rating-plus').forEach(function(item) {
         item.addEventListener("click", function(event) {
             let plusBtn = event.target.closest('.rating-plus');
             
@@ -314,7 +317,7 @@ function changeRating() {
     });
 
 
-    document.querySelectorAll('.rating-minus').forEach(function(item) {
+   document.querySelectorAll('.rating-minus').forEach(function(item) {
         item.addEventListener("click", function(event) {
             let minusBtn = event.target.closest('.rating-minus');
             
@@ -324,8 +327,8 @@ function changeRating() {
             };
             saveComments();
         });
-    });
-    
+   });
+
 };
      
             
