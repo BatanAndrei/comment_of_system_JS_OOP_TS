@@ -95,7 +95,7 @@ let select = function() {
     validateTextarea();
 
 
-    // создаём от правку, отображение и сохранение комментов
+    // создаём отправку, отображение и сохранение комментов
     
     let comments = [];
     
@@ -110,8 +110,7 @@ let select = function() {
             photoSend: './images/Max.png',
             like: false,
             favoriteOff: 'В избранное',
-            //nameAnswer: 'Алексей_1994b',
-            //photoAnswer: './images/Alex.png',
+            ratingScore: 0,
         };
 
             count.innerText = `Макс. ${limit} символов`;     // обнуляем при клике счётчик символов
@@ -123,6 +122,7 @@ let select = function() {
             showComments();
             saveComments();
             toggleHeart();
+            changeRating();
         } 
     };
 
@@ -148,13 +148,14 @@ let select = function() {
         showComments();
         //после вызываем навешивание кликов на лайки(иначе ошибка будет)
         toggleHeart();
+        changeRating();
     };
     
     localComments()    
 
     function showComments() {                                    // рисуем отправленный коммент
         let resultComment = document.getElementById('result-comment');
-         
+        
         let out = '';
         //ниже вызываем paintHeart и рисуем оттуда нужное состояние лайка
         comments.forEach(function(item, index) {
@@ -163,30 +164,41 @@ let select = function() {
            out += `<div class="text-date">${timeConverter(item.time)}</div>`
            out += `<p class="text-sent">${item.body}</p>`;
            out += `<div class="toolbar-sent">
+            
                        <button class="button-bordernone">
                            <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
                            </svg>
                        </button>
+                       
                        <h3 class="toolbar-sent_text">Ответить</h3>
 
                        <div class="inFavorite ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
                             ${paintHeart(item.like)}
                        </div>
-
-                       <button class="button-bordernone">
-                           <svg class="toolbar-sent_rating-plus" width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       
+                       <div class="rating-plus">
+                       <button class="button-bordernone btn__rating-plus" data-plus>
+                           <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                            <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
                            </svg>
                        </button>
-                       <h3 class="toolbar-sent_text-rating">0</h3>
-                       <button class="button-bordernone">
-                           <svg class="toolbar-sent_rating-minus " width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       </div>
+
+                       
+                       <h3 class="toolbar-sent_text-rating" data-index-change="${index}">${item.ratingScore}</h3>
+                       
+
+                       <div class="rating-minus">
+                       <button class="button-bordernone btn__rating-minus" data-minus>
+                           <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                            <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
                        </svg>
                        </button>
+                       </div>
+                    </div>
                    </div>`; 
         });         
         resultComment.innerHTML = out;
@@ -281,9 +293,43 @@ function paintHeart(like){
     return htmlHeart
 }
     
+// вешаем клики на рейтинг
 
+
+function changeRating() {   
+
+    let indexRating = document.querySelector('.toolbar-sent_text-rating');
+    const indRat = indexRating.getAttribute('data-index-change');
+
+    document.querySelectorAll('.rating-plus').forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            let plusBtn = event.target.closest('.rating-plus');
+            
+            if(plusBtn.classList.contains('rating-plus')){
+                //comments[indRat].ratingScore +=1;
+                indexRating.innerHTML = `<h3 class="toolbar-sent_text-rating">${comments[indRat].ratingScore +=1}</h3>`;
+            };
+            saveComments();
+        });
+    });
+
+
+    document.querySelectorAll('.rating-minus').forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            let minusBtn = event.target.closest('.rating-minus');
+            
+            if(minusBtn.classList.contains('rating-minus')){
+                //comments[indRat].ratingScore +=1;
+                indexRating.innerHTML = `<h3 class="toolbar-sent_text-rating">${comments[indRat].ratingScore -=1}</h3>`;
+            };
+            saveComments();
+        });
+    });
+    
+};
      
             
+        
        
   
     
