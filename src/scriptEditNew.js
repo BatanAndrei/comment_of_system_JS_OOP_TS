@@ -333,8 +333,8 @@ function createAnswer() {
         item.addEventListener('click', function(event){
             arrowAnswer = event.target.closest('.btn-answer');
             indexArrow = arrowAnswer.getAttribute('data-index-arrow');
-            drowAnswer = document.querySelector(`.answer-field-${indexArrow}`); 
-            drowAnswer.innerHTML =
+            drawAnswer = document.querySelector(`.answer-field-${indexArrow}`); 
+            drawAnswer.innerHTML =
                 `<form class="area-answer">
                     <input class="field-answer" type="text" size="40" placeholder="Введите ответ...">
                     <button class="submit-answer" type="submit" id="btnAnswer">Ответить</button>
@@ -352,8 +352,8 @@ function submitAnswer() {
     document.querySelectorAll('.submit-answer').forEach(function(item){  
         item.addEventListener('click', function(subm){
             subm.preventDefault();
-            console.log(drowAnswer);
-            drowAnswer.innerHTML = `<p>Привет</p>`;
+            console.log(drawAnswer);
+            drawAnswer.innerHTML = `<p>Привет</p>`;
         })
     }) 
 }
