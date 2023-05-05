@@ -1,4 +1,4 @@
-
+ 
 
 // создание селекта
 
@@ -102,7 +102,7 @@ let select = function() {
     document.getElementById('comment-send').onclick = function() {  
         event.preventDefault();
         let commentBody = document.getElementById('comment-body');
-
+    
         let comment = {
             body: commentBody.value,
             time: Math.floor(Date.now() / 1000),
@@ -124,6 +124,7 @@ let select = function() {
             toggleHeart();
             changeRating();
             createAnswer();
+            submitAnswer();
         } 
     };
 
@@ -151,6 +152,7 @@ let select = function() {
         toggleHeart();
         changeRating();
         createAnswer();
+        submitAnswer();
     };
     
     localComments();    
@@ -204,6 +206,8 @@ let select = function() {
 
 
                     </div>
+
+                    <div class="block-result-answer answer-field-${index}"></div>
                    </div>`; 
         });         
         resultComment.innerHTML = out;
@@ -322,21 +326,44 @@ function changeRating() {
             
 // вешаем клик на ОТВЕТ
         
-       
+
 function createAnswer() {
     document.querySelectorAll('.btn-answer').forEach(function(item){
         item.addEventListener('click', function(event){
             arrowAnswer = event.target.closest('.btn-answer');
             indexArrow = arrowAnswer.getAttribute('data-index-arrow');
-            console.log(indexArrow)
-            
+            drowAnswer = document.querySelector(`.answer-field-${indexArrow}`); 
+            drowAnswer.innerHTML =
+            `<form class="area-answer">
+                <input class="field-answer" type="text" size="40" placeholder="Введите ответ...">
+                <button class="submit-answer" type="submit" id="btnAnswer">Отправить</button>
+            </form>`;
+    
+            document.getElementById('btnAnswer').onclick = function(subm) {  
+                subm.preventDefault();
+            console.log('hsjbkjbzcc');
+            }
         })
     })
 }
     
 
+    
 
 
-   
+
+function submitAnswer() {
+    document.querySelectorAll('.submit-answer').forEach(function(item){
+        item.addEventListener('click', function(event){
+            
+            btnSubmitAnswer = event.target.closest('.submit-answer');
+              
+        })
+    })
+
+}
+
+
+
         
      

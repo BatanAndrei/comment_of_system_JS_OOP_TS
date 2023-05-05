@@ -419,3 +419,29 @@
     display: flex;
 }
 
+.area-answer {
+    margin: 0px 0px 10px 90px;
+    width: 500px;
+    height: 30px;
+     /* border: 1px solid black */
+}
+
+.field-answer {
+    height: 25px;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.submit-answer {
+    border: none;
+    margin-left: 20px;
+    border-radius: 5px;
+    background-color: #ABD873;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+}
