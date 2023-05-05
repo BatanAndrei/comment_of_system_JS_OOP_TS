@@ -50,7 +50,7 @@ let select = function() {
     };
 
 
-    // счётчик символов комента 
+    // счётчик символов коммента 
     
     let count = document.querySelector('.count-comment-body');
     let message = document.querySelector('.text-long-message')
@@ -123,6 +123,7 @@ let select = function() {
             saveComments();
             toggleHeart();
             changeRating();
+            createAnswer();
         } 
     };
 
@@ -149,6 +150,7 @@ let select = function() {
         //после вызываем навешивание кликов на лайки(иначе ошибка будет)
         toggleHeart();
         changeRating();
+        createAnswer();
     };
     
     localComments();    
@@ -165,7 +167,7 @@ let select = function() {
            out += `<p class="text-sent">${item.body}</p>`;
            out += `<div class="toolbar-sent">
             
-                       <button class="button-bordernone">
+                       <button class="button-bordernone btn-answer" data-index-arrow="${index}">
                            <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
                            </svg>
@@ -223,7 +225,7 @@ let select = function() {
     
 
 
-// вешаем клик на сердечко "В избранное"
+// вешаем клик на ЛАЙК "В избранное"
 
 
 function toggleHeart() {    
@@ -296,7 +298,7 @@ function paintHeart(like){
     return htmlHeart;
 }
     
-// вешаем клики на рейтинг
+// вешаем клики на РЕЙТИНГ 
 
 
 function changeRating() {   
@@ -318,9 +320,19 @@ function changeRating() {
 };
      
             
+// вешаем клик на ОТВЕТ
         
        
-  
+function createAnswer() {
+    document.querySelectorAll('.btn-answer').forEach(function(item){
+        item.addEventListener('click', function(event){
+            arrowAnswer = event.target.closest('.btn-answer');
+            indexArrow = arrowAnswer.getAttribute('data-index-arrow');
+            console.log(indexArrow)
+            
+        })
+    })
+}
     
 
 
