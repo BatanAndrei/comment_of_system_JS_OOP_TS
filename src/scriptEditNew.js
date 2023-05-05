@@ -8,11 +8,11 @@ let select = function() {
     let selectArrow = document.querySelector('.svg-arrow');
 
     selectHeader.forEach(item => {
-        item.addEventListener('click', selectToggle) // переключаем класс .is-active у .header-tabs_select показывая .header-tabs_select-body.
+        item.addEventListener('click', selectToggle); // переключаем класс .is-active у .header-tabs_select показывая .header-tabs_select-body.
     });
 
     selectItem.forEach(item => { //нажимаем на пункты .header-tabs_select-body и записываем в .header-tabs_select-current.
-        item.addEventListener('click', selectChoose)
+        item.addEventListener('click', selectChoose);
     });
 
     function selectToggle() {     //переключает .is-active у родителя .header-tabs_select-header (т.е. у .header-tabs_select)
@@ -32,7 +32,7 @@ let select = function() {
 
     function removeCheckMarkClass() {
         selectItem.forEach(item => {
-        item.classList.remove('check-mark') // удаляем класс .check-mark (убираем галочку)
+        item.classList.remove('check-mark'); // удаляем класс .check-mark (убираем галочку)
         });
     };
 
@@ -151,7 +151,7 @@ let select = function() {
         changeRating();
     };
     
-    localComments()    
+    localComments();    
 
     function showComments() {                                    // рисуем отправленный коммент
         let resultComment = document.getElementById('result-comment');
@@ -161,7 +161,7 @@ let select = function() {
         comments.forEach(function(item, index) {
            out += `<div class="image-alex-sent"></div>`;
            out += `<div class="name-sent">${item.nameSend}</div>`;
-           out += `<div class="text-date">${timeConverter(item.time)}</div>`
+           out += `<div class="text-date">${timeConverter(item.time)}</div>`;
            out += `<p class="text-sent">${item.body}</p>`;
            out += `<div class="toolbar-sent">
             
@@ -229,30 +229,30 @@ let select = function() {
 function toggleHeart() {    
     document.querySelectorAll('.inFavorite').forEach(function(item) {
         item.addEventListener("click", function(event) {
-            let favoriteBtn = event.target.closest('.inFavorite')
+            let favoriteBtn = event.target.closest('.inFavorite');
             favoriteBtn.classList.toggle("toggleHeart");
-            const index = favoriteBtn.getAttribute('data-index')
+            const index = favoriteBtn.getAttribute('data-index');
 
             if(favoriteBtn.classList.contains("toggleHeart")) {
                 //перерисрвываем верстку лайка передавая значение тру
                 favoriteBtn.innerHTML = paintHeart(true);
                 //тут перезаписываем значение лайка в нашем массиве
-                comments[index].like = true
+                comments[index].like = true;
             }else if(!favoriteBtn.classList.contains("toggleHeart")){
                 //перерисрвываем верстку лайка передавая значение фолс
                 favoriteBtn.innerHTML = paintHeart(false);
                 //тут перезаписываем значение лайка в нашем массиве
-                comments[index].like = false
+                comments[index].like = false;
             }
             //перезаписываем в локальном хранилище данные чтобы были актуальны
-            saveComments()
+            saveComments();
         })
     })
 }
             
 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
 function paintHeart(like){
-    let htmlHeart = '' 
+    let htmlHeart = ''; 
     if(like){   
         htmlHeart = `<button class="button-bordernone">
             <svg class="toolbar-sent_svg-heartempty" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -272,7 +272,7 @@ function paintHeart(like){
             </defs>
             </svg>
         </button>
-        <h3 class="toolbar-sent_text">В избранном</h3>`
+        <h3 class="toolbar-sent_text">В избранном</h3>`;
     }else{
         htmlHeart = `<button class="button-bordernone">
             <svg  class="toolbar-sent_svg-heartempty" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -291,9 +291,9 @@ function paintHeart(like){
             </defs>
             </svg>
         </button>
-        <h3 class="toolbar-sent_text">В избранное</h3>`
+        <h3 class="toolbar-sent_text">В избранное</h3>`;
     }
-    return htmlHeart
+    return htmlHeart;
 }
     
 // вешаем клики на рейтинг
@@ -302,16 +302,16 @@ function paintHeart(like){
 function changeRating() {   
     document.querySelectorAll('.rating').forEach(function(item) {
         item.addEventListener("click", function(event) {    
-            const btn = event.target.closest('.rating')
+            const btn = event.target.closest('.rating');
             const indRat = btn.getAttribute('data-index-change');
 
             if(btn.classList.contains('btn__rating-plus')){
-                comments[indRat].ratingScore++
+                comments[indRat].ratingScore++;
             };
             if(btn.classList.contains('btn__rating-minus')){
-                comments[indRat].ratingScore--
+                comments[indRat].ratingScore--;
             };
-            document.querySelector(`.rating-text-${indRat}`).innerText = comments[indRat].ratingScore
+            document.querySelector(`.rating-text-${indRat}`).innerText = comments[indRat].ratingScore;
             saveComments();
         });
     });
