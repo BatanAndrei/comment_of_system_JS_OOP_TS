@@ -124,7 +124,7 @@ let select = function() {
             toggleHeart();
             changeRating();
             createAnswer();
-            submitAnswer();
+            //submitAnswer();
         } 
     };
 
@@ -152,7 +152,7 @@ let select = function() {
         toggleHeart();
         changeRating();
         createAnswer();
-        submitAnswer();
+        //submitAnswer();
     };
     
     localComments();    
@@ -257,6 +257,8 @@ function toggleHeart() {
 }
             
 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
+
+
 function paintHeart(like){
     let htmlHeart = ''; 
     if(like){   
@@ -302,8 +304,8 @@ function paintHeart(like){
     return htmlHeart;
 }
     
-// вешаем клики на РЕЙТИНГ 
 
+// вешаем клики на РЕЙТИНГ 
 
 function changeRating() {   
     document.querySelectorAll('.rating').forEach(function(item) {
@@ -323,10 +325,9 @@ function changeRating() {
     });
 };
      
-            
+
 // вешаем клик на ОТВЕТ
         
-
 function createAnswer() {
     document.querySelectorAll('.btn-answer').forEach(function(item){
         item.addEventListener('click', function(event){
@@ -334,36 +335,25 @@ function createAnswer() {
             indexArrow = arrowAnswer.getAttribute('data-index-arrow');
             drowAnswer = document.querySelector(`.answer-field-${indexArrow}`); 
             drowAnswer.innerHTML =
-            `<form class="area-answer">
-                <input class="field-answer" type="text" size="40" placeholder="Введите ответ...">
-                <button class="submit-answer" type="submit" id="btnAnswer">Отправить</button>
-            </form>`;
-    
-            document.getElementById('btnAnswer').onclick = function(subm) {  
-                subm.preventDefault();
-            console.log('hsjbkjbzcc');
-            }
+                `<form class="area-answer">
+                    <input class="field-answer" type="text" size="40" placeholder="Введите ответ...">
+                    <button class="submit-answer" type="submit" id="btnAnswer">Ответить</button>
+                </form>`;
+
+            submitAnswer()
         })
     })
 }
     
 
-    
-
-
+// снимаем submit с кнопки "Ответить" - preventDefault();
 
 function submitAnswer() {
-    document.querySelectorAll('.submit-answer').forEach(function(item){
-        item.addEventListener('click', function(event){
-            
-            btnSubmitAnswer = event.target.closest('.submit-answer');
-              
+    document.querySelectorAll('.submit-answer').forEach(function(item){  
+        item.addEventListener('click', function(subm){
+            subm.preventDefault();
+            console.log(drowAnswer);
+            drowAnswer.innerHTML = `<p>Привет</p>`;
         })
-    })
-
+    }) 
 }
-
-
-
-        
-     
