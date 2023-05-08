@@ -363,7 +363,7 @@ function submitAnswer() {
             comAnswers.push(comAnswer);
             
             for(let i = 0; i < comments.length; i++){
-                comments[i].answer = comAnswer;
+                comments[i].answer = comAnswers;
                 console.log(comments[i]);
             };
             answerContentDraw();
