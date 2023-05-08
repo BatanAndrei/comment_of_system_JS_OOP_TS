@@ -398,7 +398,30 @@ function answerContentDraw() {
                     <p class="text-send-answer">${item.bodyAnswer}</p>
                     <div class="inFavorite position-like-answer ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
                             ${paintHeart(item.like)}
-                    </div>`;
+                    </div>
+                    <div class="rating-answer">
+                        <div class="rating-plus">
+                            <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
+                                <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
+                                <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                       
+                        <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScoreAnswer}</h3>
+                       
+
+                        <div class="rating-minus">
+                            <button class="button-bordernone rating btn__rating-minus" data-index-change="${index}">
+                                <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
+                                <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
+                            </svg>
+                            </button>
+                        </div>
+                    </div>    `;
       
     });
     

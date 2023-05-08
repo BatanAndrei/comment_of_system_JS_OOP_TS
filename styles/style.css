@@ -506,3 +506,8 @@
 .position-like-answer {
     margin-left: 157px;
 }
+
+.rating-answer {
+    display: flex;
+    margin: -27px 0px 0px 320px;
+}
