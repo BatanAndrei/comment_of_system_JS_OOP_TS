@@ -395,7 +395,10 @@ function answerContentDraw() {
                     </div>
                     <div class="post-sender-name">${item.userSendAnswer}</div>
                     <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>
-                    <p class="text-send-answer">${item.bodyAnswer}</p>`;
+                    <p class="text-send-answer">${item.bodyAnswer}</p>
+                    <div class="inFavorite position-like-answer ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
+                            ${paintHeart(item.like)}
+                    </div>`;
       
     });
     
