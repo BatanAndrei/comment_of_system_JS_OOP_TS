@@ -427,4 +427,3 @@ function answerContentDraw() {
     
     drawAnswer.innerHTML = outAnswer;
 };
-

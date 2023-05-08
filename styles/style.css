@@ -491,7 +491,7 @@
 }
 
 .text-send-answer {
-    width: 920px;
+    width: 850px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -504,10 +504,10 @@
 }
 
 .position-like-answer {
-    margin-left: 157px;
+    margin: 0px 0px 0px 157px;
 }
 
 .rating-answer {
     display: flex;
-    margin: -27px 0px 0px 320px;
+    margin: -27px 0px 30px 320px;
 }
