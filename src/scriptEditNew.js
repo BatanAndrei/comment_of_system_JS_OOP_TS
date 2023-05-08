@@ -336,13 +336,14 @@ function createAnswer() {
             drawAnswer = document.querySelector(`.answer-field-${indexArrow}`); 
             drawAnswer.innerHTML =
                 `<form class="area-answer">
-                    <input class="field-answer" type="text" size="40" placeholder="Введите ответ...">
+                    <input class="field-answer" type="text" size="40" id="idAnswer" placeholder="Введите ответ...">
                     <button class="submit-answer" type="submit" id="btnAnswer">Ответить</button>
                 </form>`;
 
-            submitAnswer()
+                submitAnswer()
         })
     })
+    
 }
     
 
@@ -352,8 +353,32 @@ function submitAnswer() {
     document.querySelectorAll('.submit-answer').forEach(function(item){  
         item.addEventListener('click', function(subm){
             subm.preventDefault();
-            console.log(drawAnswer);
-            drawAnswer.innerHTML = `<p>Привет</p>`;
+            console.log(drawAnswer)
+            answerContentDraw();
         })
-    }) 
+    })  
 }
+
+//рисуем ответ
+
+function answerContentDraw() {
+
+    let outAnswer = '';
+
+    comments.forEach(function(item, index){
+      outAnswer = `<p>${item.bodyAnswer}</p>`;
+      //console.log(comments)
+    })
+    console.log(comments)
+    drawAnswer.innerHTML = outAnswer;
+}
+
+/* let comment = {
+    body: commentBody.value,
+    time: Math.floor(Date.now() / 1000),
+    nameSend: 'Максим Авдеенко',
+    photoSend: './images/Max.png',
+    like: false,
+    favoriteOff: 'В избранное',
+    ratingScore: 0,
+}; */
