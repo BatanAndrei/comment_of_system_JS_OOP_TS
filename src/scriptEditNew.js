@@ -111,6 +111,7 @@ let select = function() {
             like: false,
             favoriteOff: 'В избранное',
             ratingScore: 0,
+            answer: '',
         };
 
             count.innerText = `Макс. ${limit} символов`;     // обнуляем при клике счётчик символов
@@ -224,7 +225,7 @@ let select = function() {
         let sec = a.getSeconds();
         let time = date + '.' + month + ' ' + hour + ':' + min;
         return time;
-    }
+    };
 
     
 
@@ -249,12 +250,12 @@ function toggleHeart() {
                 favoriteBtn.innerHTML = paintHeart(false);
                 //тут перезаписываем значение лайка в нашем массиве
                 comments[index].like = false;
-            }
+            };
             //перезаписываем в локальном хранилище данные чтобы были актуальны
             saveComments();
-        })
-    })
-}
+        });
+    });
+};
             
 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
 
@@ -300,9 +301,9 @@ function paintHeart(like){
             </svg>
         </button>
         <h3 class="toolbar-sent_text">В избранное</h3>`;
-    }
+    };
     return htmlHeart;
-}
+};
     
 
 // вешаем клики на РЕЙТИНГ 
@@ -340,24 +341,43 @@ function createAnswer() {
                     <button class="submit-answer" type="submit" id="btnAnswer">Ответить</button>
                 </form>`;
 
-                submitAnswer()
-        })
-    })
+                submitAnswer();
+        });
+    });
     
-}
+};
     
 
 // снимаем submit с кнопки "Ответить" - preventDefault();
+
+let comAnswers = [];
 
 function submitAnswer() {
     document.querySelectorAll('.submit-answer').forEach(function(item){  
         item.addEventListener('click', function(subm){
             subm.preventDefault();
-            console.log(drawAnswer)
+            let answertBody = document.getElementById('idAnswer');
+
+            let comAnswer = {
+                bodyAnswer: answertBody.value,
+                timeAnswer: Math.floor(Date.now() / 1000),
+                nameSendAnswer: 'Максим Авдеенко',
+                nameAnswer: 'Джунбокс3000',
+                photoAnswer: './images/Jun.png',
+                likeAnswer: false,
+                favoriteOffAnswer: 'В избранное',
+                ratingScoreAnswer: 0,
+            };
+            comAnswers.push(comAnswer);
+            
+           /*  for(let i = 0; i < comments.length; i++){
+                comments[i].answer = comAnswer;
+                console.log(comments[i]);
+            }; */
             answerContentDraw();
-        })
-    })  
-}
+        });
+    });
+};
 
 //рисуем ответ
 
@@ -365,20 +385,12 @@ function answerContentDraw() {
 
     let outAnswer = '';
 
-    comments.forEach(function(item, index){
-      outAnswer = `<p>${item.bodyAnswer}</p>`;
-      //console.log(comments)
-    })
-    console.log(comments)
+    comAnswers.forEach(function(item, index){
+      outAnswer = `<div class="image-jun-answer"></div>
+                   <div class="name-sent">${item.nameSendAnswer}</div>`;
+      
+    });
+    
     drawAnswer.innerHTML = outAnswer;
-}
+};
 
-/* let comment = {
-    body: commentBody.value,
-    time: Math.floor(Date.now() / 1000),
-    nameSend: 'Максим Авдеенко',
-    photoSend: './images/Max.png',
-    like: false,
-    favoriteOff: 'В избранное',
-    ratingScore: 0,
-}; */
