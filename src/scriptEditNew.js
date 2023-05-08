@@ -129,15 +129,6 @@ let select = function() {
         } 
     };
 
-  /*   let keys = Object.keys(localStorage);
-    for(let key of keys) {
-      alert(`${key}: ${localStorage.getItem(key)}`);
-    } */
-
-    /* for(let i=0; i<localStorage.length; i++) {
-        let key = localStorage.key(i);
-        alert(`${key}: ${localStorage.getItem(key)}`);
-      } */
 
     function saveComments() {     
         localStorage.setItem('comments', JSON.stringify(comments));                    // сохраняем в Local  
