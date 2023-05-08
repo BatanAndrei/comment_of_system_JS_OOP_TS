@@ -106,7 +106,7 @@ let select = function() {
         let comment = {
             body: commentBody.value,
             time: Math.floor(Date.now() / 1000),
-            nameSend: 'Максим Авдеенко',
+            userSend: 'Максим Авдеенко',
             photoSend: './images/Max.png',
             like: false,
             favoriteOff: 'В избранное',
@@ -165,7 +165,7 @@ let select = function() {
         //ниже вызываем paintHeart и рисуем оттуда нужное состояние лайка
         comments.forEach(function(item, index) {
            out += `<div class="image-alex-sent"></div>`;
-           out += `<div class="name-sent">${item.nameSend}</div>`;
+           out += `<div class="user-sent">${item.userSend}</div>`;
            out += `<div class="text-date">${timeConverter(item.time)}</div>`;
            out += `<p class="text-sent">${item.body}</p>`;
            out += `<div class="toolbar-sent">
@@ -361,8 +361,8 @@ function submitAnswer() {
             let comAnswer = {
                 bodyAnswer: answertBody.value,
                 timeAnswer: Math.floor(Date.now() / 1000),
-                nameSendAnswer: 'Максим Авдеенко',
-                nameAnswer: 'Джунбокс3000',
+                userSendAnswer: 'Максим Авдеенко',
+                userAnswer: 'Джунбокс3000',
                 photoAnswer: './images/Jun.png',
                 likeAnswer: false,
                 favoriteOffAnswer: 'В избранное',
@@ -387,7 +387,14 @@ function answerContentDraw() {
 
     comAnswers.forEach(function(item, index){
       outAnswer = `<div class="image-jun-answer"></div>
-                   <div class="name-sent">${item.nameSendAnswer}</div>`;
+                    <div class="user-answer">${item.userAnswer}</div>
+                    <div class="arrow-answer">
+                        <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                               <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
+                        </svg>
+                    </div>
+                    <div class="post-sender-name">${item.userSendAnswer}</div>
+                    <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>`;
       
     });
     
