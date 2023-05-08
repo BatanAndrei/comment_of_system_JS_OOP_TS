@@ -423,7 +423,6 @@
     margin: 0px 0px 10px 90px;
     max-width: 500px;
     max-height: 30px;
-    border: 1px solid black
 }
 
 .field-answer {
@@ -489,4 +488,17 @@
     margin: -18px 0px 0px 540px;
     color: #000000;
     opacity: 0.4;
+}
+
+.text-send-answer {
+    width: 920px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    border: #122AC0;
+    word-wrap: break-word;
+    margin: 10px 0px 15px 180px;
+    color: #000000;
 }

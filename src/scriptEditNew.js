@@ -394,7 +394,8 @@ function answerContentDraw() {
                         </svg>
                     </div>
                     <div class="post-sender-name">${item.userSendAnswer}</div>
-                    <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>`;
+                    <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>
+                    <p class="text-send-answer">${item.bodyAnswer}</p>`;
       
     });
     
