@@ -125,6 +125,7 @@ let select = function() {
             toggleHeart();
             changeRating();
             createAnswer();
+            answerContentDraw();
             //submitAnswer();
         } 
     };
