@@ -321,6 +321,10 @@ function changeRating() {
      
 
 // вешаем клик на ОТВЕТ
+
+let arrowAnswer = '';
+let indexArrow = '';
+let drawAnswer = '';
         
 function createAnswer() {
     document.querySelectorAll('.btn-answer').forEach(function(item){
