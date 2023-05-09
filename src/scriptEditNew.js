@@ -151,6 +151,7 @@ let select = function() {
         changeRating();
         createAnswer();
         submitAnswer();
+        
     };
     
     localComments();    
@@ -371,10 +372,10 @@ function submitAnswer() {
             
             for(let i = 0; i < comments.length; i++){
                 comments[i].answer = comAnswers;
-                console.log(comments[i]);
             };
             answerContentDraw();
             saveComments();
+            console.table(comAnswer);
         });
     });
 };
