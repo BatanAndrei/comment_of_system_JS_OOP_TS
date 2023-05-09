@@ -98,6 +98,10 @@ let select = function() {
     // создаём отправку, отображение и сохранение комментов
     
     let comments = [];
+    let comAnswers = [];
+    let arrowAnswer = '';
+    let indexArrow = '';
+    let drawAnswer = '';
     
     document.getElementById('comment-send').onclick = function() {  
         event.preventDefault();
@@ -125,8 +129,8 @@ let select = function() {
             toggleHeart();
             changeRating();
             createAnswer();
-            //answerContentDraw();
-            //submitAnswer();
+            answerContentDraw();
+            submitAnswer();
         } 
     };
 
@@ -145,8 +149,8 @@ let select = function() {
         toggleHeart();
         changeRating();
         createAnswer();
-        //answerContentDraw();
-        //submitAnswer();
+        answerContentDraw();
+        submitAnswer();
     };
     
     localComments();    
@@ -322,9 +326,6 @@ function changeRating() {
 
 // вешаем клик на ОТВЕТ
 
-let arrowAnswer = '';
-let indexArrow = '';
-let drawAnswer = '';
         
 function createAnswer() {
     document.querySelectorAll('.btn-answer').forEach(function(item){
@@ -347,7 +348,7 @@ function createAnswer() {
 
 // снимаем submit с кнопки "Ответить" - preventDefault();
 
-let comAnswers = [];
+
 
 function submitAnswer() {
     document.querySelectorAll('.submit-answer').forEach(function(item){  
