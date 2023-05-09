@@ -375,7 +375,7 @@ function submitAnswer() {
             };
             answerContentDraw();
             saveComments();
-            console.table(comAnswer);
+            console.table(comments);
         });
     });
 };
