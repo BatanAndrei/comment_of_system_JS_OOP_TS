@@ -125,11 +125,11 @@ let select = function() {
         if(comment.body.length != '' && comment.body.length <= limit) {
             comments.push(comment);
             showComments();
+            answerContentDraw();
             saveComments();
             toggleHeart();
             changeRating();
             createAnswer();
-            answerContentDraw();
             submitAnswer();
         } 
     };
@@ -145,11 +145,11 @@ let select = function() {
         }
         //сначала рисуем
         showComments();
+        answerContentDraw();
         //после вызываем навешивание кликов на лайки(иначе ошибка будет)
         toggleHeart();
         changeRating();
         createAnswer();
-        answerContentDraw();
         submitAnswer();
     };
     
@@ -340,6 +340,7 @@ function createAnswer() {
                 </form>`;
 
                 submitAnswer();
+                saveComments();
         });
     });
     
