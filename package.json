@@ -5,7 +5,9 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node foo.js"
+    "start": "",
+    "build": "webpack --config webpack.config.js",
+    "start:dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -26,5 +28,9 @@
     "axios": "^1.3.6",
     "typescript": "^5.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  }
 }
