@@ -453,8 +453,8 @@ function submitAnswer() {
             // };
             //передаем обязательно индекс родителя
             answerContentDraw(indexArrow);
-            toggleHeartAnswer();
-            changeRatingAnswer();
+            toggleHeartAnswer(indexArrow);
+            changeRatingAnswer(indexArrow);
             saveComments();
         });
     });
