@@ -511,7 +511,25 @@
     margin: 0px 0px 0px 157px;
 }
 
-.rating-answer {
+.rating-answer-area {
     display: flex;
     margin: -27px 0px 30px 320px;
+}
+
+.rating-answer {
+    display: flex;
+}
+
+.btn__rating-plus-answer {
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    margin: 0px 0px 0px 30px;
+}
+
+.btn__rating-minus-answer {
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    margin: 0px 0px 0px 5px;
 }

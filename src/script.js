@@ -222,6 +222,8 @@ function showComments() {                                    // рисуем о�
         //вызываем функцию отрисовки и обязательно передаем индекс комента
         answerContentDraw(index);
         toggleHeartAnswer(index);
+        changeRatingAnswer(index);
+        
     });
     // resultComment.innerHTML = out;
 };
@@ -251,6 +253,7 @@ function toggleHeart() {
             let favoriteBtn = event.target.closest('.inFavorite');
             favoriteBtn.classList.toggle("toggleHeart");
             const index = favoriteBtn.getAttribute('data-index');
+            console.log(index)
 
             if(favoriteBtn.classList.contains("toggleHeart")) {
                 //перерисрвываем верстку лайка передавая значение тру
@@ -275,15 +278,22 @@ function toggleHeartAnswer(index) {
     document.querySelectorAll('.inFavoriteAnswer').forEach(function(item) {
         item.addEventListener("click", function(event) {
             let favoriteBtnAnswer = event.target.closest('.inFavoriteAnswer');
-            favoriteBtnAnswer.classList.toggle("toggleHeart");
-            const indexAnswer = favoriteBtnAnswer.getAttribute('data-index-answer');
+            favoriteBtnAnswer.classList.toggle("toggleHeartAnswer");
+            let indexAnswer = favoriteBtnAnswer.getAttribute('data-index-answer');
 
-            if(favoriteBtnAnswer.classList.contains("toggleHeart")) {
+          /*   indexArrow = arrowAnswer.getAttribute('data-index-arrow');
+            drawAnswer = document.querySelector(`.answer-field-${indexArrow}`); */
+            //const elCommentInd = document.querySelector(`.answer-field-${index}"`);
+            
+            console.log(index)
+           
+
+            if(favoriteBtnAnswer.classList.contains("toggleHeartAnswer")) {
                 //перерисрвываем верстку лайка передавая значение тру
                 favoriteBtnAnswer.innerHTML = paintHeart(true);
                 //тут перезаписываем значение лайка в нашем массиве
                 comments[index].answer[indexAnswer].likeAnswer = true;
-            }else if(!favoriteBtnAnswer.classList.contains("toggleHeart")){
+            }else if(!favoriteBtnAnswer.classList.contains("toggleHeartAnswer")){
                 //перерисрвываем верстку лайка передавая значение фолс
                 favoriteBtnAnswer.innerHTML = paintHeart(false);
                 //тут перезаписываем значение лайка в нашем массиве
@@ -346,7 +356,7 @@ function paintHeart(like){
 };
     
 
-// вешаем клики на РЕЙТИНГ 
+// вешаем клики на РЕЙТИНГ комменты
 
 function changeRating() {   
     document.querySelectorAll('.rating').forEach(function(item) {
@@ -367,6 +377,27 @@ function changeRating() {
 };
      
 
+// вешаем клики на РЕЙТИНГ комменты
+
+function changeRatingAnswer(index) {   
+    document.querySelectorAll('.rating-answer').forEach(function(item) {
+        item.addEventListener("click", function(event) {    
+            const btnAns = event.target.closest('.rating-answer');
+            const indRatAns = btnAns.getAttribute('data-index-change-answer');
+            console.log(indRatAns)
+
+            if(btnAns.classList.contains('btn__rating-plus-answer')){
+                comments[index].answer[indRatAns].ratingScoreAnswer++;
+            };
+            if(btnAns.classList.contains('btn__rating-minus-answer')){
+                comments[index].answer[indRatAns].ratingScoreAnswer--;
+            };
+            document.querySelector(`.rating-text-answer${indRatAns}`).innerText = comments[index].answer[indRatAns].ratingScoreAnswer;
+            saveComments();
+        });
+    });
+};
+
 // вешаем клик на ОТВЕТ
 
         
@@ -384,6 +415,7 @@ function createAnswer() {
 
                 submitAnswer(indexArrow);
                 toggleHeartAnswer(indexArrow);
+                changeRatingAnswer(indexArrow)
                 saveComments();
         });
     });
@@ -421,7 +453,8 @@ function submitAnswer() {
             // };
             //передаем обязательно индекс родителя
             answerContentDraw(indexArrow);
-            toggleHeartAnswer(indexArrow);
+            toggleHeartAnswer();
+            changeRatingAnswer();
             saveComments();
         });
     });
@@ -446,12 +479,12 @@ function answerContentDraw(index) {
                     <div class="post-sender-name">${item.userSendAnswer}</div>
                     <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>
                     <p class="text-send-answer">${item.bodyAnswer}</p>
-                    <div class="inFavoriteAnswer position-like-answer ${item.likeAnswer ? 'toggleHeart' : ''}" data-index-answer="${index}">
+                    <div class="inFavoriteAnswer position-like-answer ${item.likeAnswer ? 'toggleHeartAnswer' : ''}" data-index-answer="${index}">
                             ${paintHeart(item.likeAnswer)}
                     </div>
-                    <div class="rating-answer">
+                    <div class="rating-answer-area">
                         <div class="rating-plus">
-                            <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
+                            <button class="button-bordernone rating-answer btn__rating-plus-answer" data-index-change-answer="${index}">
                                 <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                                 <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
@@ -460,11 +493,11 @@ function answerContentDraw(index) {
                         </div>
 
                        
-                        <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScoreAnswer}</h3>
+                        <h3 class="toolbar-sent_text-rating rating-text-answer${index}">${item.ratingScoreAnswer}</h3>
                        
 
                         <div class="rating-minus">
-                            <button class="button-bordernone rating btn__rating-minus" data-index-change="${index}">
+                            <button class="button-bordernone rating btn__rating-minus-answer" data-index-change-answer="${index}">
                                 <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
                                 <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
