@@ -42,193 +42,207 @@ let select = function() {
 
 };
 
-    select(); 
+select(); 
 
-    function auto_grow(element) {     //увеличиваем размер поля ввода комментов
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight)+"px";
+function auto_grow(element) {     //увеличиваем размер поля ввода комментов
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+};
+
+
+// счётчик символов коммента 
+
+let count = document.querySelector('.count-comment-body');
+let message = document.querySelector('.text-long-message')
+let textarea = document.querySelector('#comment-body');
+let btn = document.querySelector('.button');
+let limit = 1000;
+
+function validateTextarea() {
+     
+    textarea.addEventListener('input', () => {
+    let textlength = textarea.value.length;
+    count.innerText = `${textlength}/${limit}`;
+
+    if(textlength > limit) {
+        count.innerHTML = `${textlength}/${limit}`;
+        count.style.color = '#FF0000';
+
+        message.innerText = `Слишком длинное сообщение`
+        message.style.color = '#FF0000';
+
+        btn.style.backgroundColor = '#dbd7d7';
+        btn.style.color = '#918d8d';
+    }else if(textlength <= 0) {
+        count.innerHTML = `Макс. ${limit} символов`;  
+        count.style.color = '#918d8d';
+
+        btn.style.backgroundColor = '#dbd7d7';
+        btn.style.color = '#918d8d';
+    }else if(textlength <= limit) {
+        message.innerText ='';
+
+        count.style.color = '#918d8d';
+
+        btn.style.backgroundColor = '#ABD873';
+        btn.style.color = '#000000';
+    }else{
+        count.innerText = `Макс. ${limit} символов`;
+    }
+    });
+};
+
+validateTextarea();
+
+
+// создаём отправку, отображение и сохранение комментов
+
+let comments = [];
+let comAnswers = [];
+let arrowAnswer = '';
+let indexArrow = '';
+let drawAnswer = '';
+
+document.getElementById('comment-send').onclick = function() {  
+    event.preventDefault();
+    let commentBody = document.getElementById('comment-body');
+
+    //answer должен быть массивом
+    let comment = {
+        answer: [],
+        body: commentBody.value,
+        time: Math.floor(Date.now() / 1000),
+        userSend: 'Максим Авдеенко',
+        photoSend: './images/Max.png',
+        like: false,
+        favoriteOff: 'В избранное',
+        ratingScore: 0
     };
 
-
-    // счётчик символов коммента 
-    
-    let count = document.querySelector('.count-comment-body');
-    let message = document.querySelector('.text-long-message')
-    let textarea = document.querySelector('#comment-body');
-    let btn = document.querySelector('.button');
-    let limit = 1000;
-
-    function validateTextarea() {
-         
-        textarea.addEventListener('input', () => {
-        let textlength = textarea.value.length;
-        count.innerText = `${textlength}/${limit}`;
-
-        if(textlength > limit) {
-            count.innerHTML = `${textlength}/${limit}`;
-            count.style.color = '#FF0000';
-
-            message.innerText = `Слишком длинное сообщение`
-            message.style.color = '#FF0000';
-
-            btn.style.backgroundColor = '#dbd7d7';
-            btn.style.color = '#918d8d';
-        }else if(textlength <= 0) {
-            count.innerHTML = `Макс. ${limit} символов`;  
-            count.style.color = '#918d8d';
-
-            btn.style.backgroundColor = '#dbd7d7';
-            btn.style.color = '#918d8d';
-        }else if(textlength <= limit) {
-            message.innerText ='';
-
-            count.style.color = '#918d8d';
-
-            btn.style.backgroundColor = '#ABD873';
-            btn.style.color = '#000000';
-        }else{
-            count.innerText = `Макс. ${limit} символов`;
-        }
-        });
-    };
-
-    validateTextarea();
-
-
-    // создаём отправку, отображение и сохранение комментов
-    
-    let comments = [];
-    let comAnswers = [];
-    let arrowAnswer = '';
-    let indexArrow = '';
-    let drawAnswer = '';
-    
-    document.getElementById('comment-send').onclick = function() {  
-        event.preventDefault();
-        let commentBody = document.getElementById('comment-body');
-    
-        let comment = {
-            body: commentBody.value,
-            time: Math.floor(Date.now() / 1000),
-            userSend: 'Максим Авдеенко',
-            photoSend: './images/Max.png',
-            like: false,
-            favoriteOff: 'В избранное',
-            ratingScore: 0,
-            answer: '',
-        };
-
-            count.innerText = `Макс. ${limit} символов`;     // обнуляем при клике счётчик символов
-            btn.style.backgroundColor = '#dbd7d7';           // обнуляем стиль счётчика
-            commentBody.value = '';                          // очищаем поле
-            
-        if(comment.body.length != '' && comment.body.length <= limit) {
-            comments.push(comment);
-            showComments();
-            answerContentDraw();
-            saveComments();
-            toggleHeart();
-            changeRating();
-            createAnswer();
-            submitAnswer();
-        } 
-    };
-
-
-    function saveComments() {     
-        localStorage.setItem('comments', JSON.stringify(comments));                    // сохраняем в Local  
-    };
-
-    function localComments() {                                  // отображаем из Local
-        if(localStorage.getItem('comments')) {
-            comments = JSON.parse(localStorage.getItem('comments'));
-        }
-        //сначала рисуем
+        count.innerText = `Макс. ${limit} символов`;     // обнуляем при клике счётчик символов
+        btn.style.backgroundColor = '#dbd7d7';           // обнуляем стиль счётчика
+        commentBody.value = '';                          // очищаем поле
+        
+    if(comment.body.length != '' && comment.body.length <= limit) {
+        comments.push(comment);
         showComments();
-        answerContentDraw();
-        //после вызываем навешивание кликов на лайки(иначе ошибка будет)
+        //тут тоже не нужно, ответов ещё не существует, так как комент новый
+        // answerContentDraw();
+        saveComments();
         toggleHeart();
         changeRating();
         createAnswer();
         submitAnswer();
-        
-    };
-    
-    localComments();    
+    } 
+};
 
-    function showComments() {                                    // рисуем отправленный коммент
-        let resultComment = document.getElementById('result-comment');
-        
+
+function saveComments() {     
+    localStorage.setItem('comments', JSON.stringify(comments));                    // сохраняем в Local  
+};
+
+function localComments() {                                  // отображаем из Local
+    if(localStorage.getItem('comments')) {
+        comments = JSON.parse(localStorage.getItem('comments'));
+    }
+    //сначала рисуем
+    showComments();
+    //тут не нужна эта функция, вызывать будем в отрисовки ответа её
+    // answerContentDraw();
+    //после вызываем навешивание кликов на лайки(иначе ошибка будет)
+    toggleHeart();
+    changeRating();
+    createAnswer();
+    submitAnswer();
+    
+};
+
+localComments();    
+
+function showComments() {                                    // рисуем отправленный коммент
+    let resultComment = document.getElementById('result-comment');
+
+    //очистим, иначе комеенты будут складываться при перезаписи
+    resultComment.innerHTML = ''
+    //out теперь не общая, всегда будет перезаписываться
+    // let out = '';
+    //ниже вызываем paintHeart и рисуем оттуда нужное состояние лайка
+    comments.forEach(function(item, index) {
+        //её тут объявим
         let out = '';
-        //ниже вызываем paintHeart и рисуем оттуда нужное состояние лайка
-        comments.forEach(function(item, index) {
-           out += `<div class="image-alex-sent"></div>`;
-           out += `<div class="user-sent">${item.userSend}</div>`;
-           out += `<div class="text-date">${timeConverter(item.time)}</div>`;
-           out += `<p class="text-sent">${item.body}</p>`;
-           out += `<div class="toolbar-sent">
-            
-                       <button class="button-bordernone btn-answer" data-index-arrow="${index}">
-                           <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                               <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
+        out += `<div class="image-alex-sent"></div>`;
+        out += `<div class="user-sent">${item.userSend}</div>`;
+        out += `<div class="text-date">${timeConverter(item.time)}</div>`;
+        out += `<p class="text-sent">${item.body}</p>`;
+        out += `<div class="toolbar-sent">
+        
+                   <button class="button-bordernone btn-answer" data-index-arrow="${index}">
+                       <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
+                       </svg>
+                   </button>
+                   
+                   <h3 class="toolbar-sent_text">Ответить</h3>
+
+                   <div class="inFavorite ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
+                        ${paintHeart(item.like)}
+                   </div>
+                   
+
+                   <div class="rating-plus">
+                       <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
+                           <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
+                           <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
                            </svg>
                        </button>
-                       
-                       <h3 class="toolbar-sent_text">Ответить</h3>
+                   </div>
 
-                       <div class="inFavorite ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
-                            ${paintHeart(item.like)}
-                       </div>
-                       
+                   
+                   <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScore}</h3>
+                   
 
-                       <div class="rating-plus">
-                           <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
-                               <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                               <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
-                               <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
-                               </svg>
-                           </button>
-                       </div>
-
-                       
-                       <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScore}</h3>
-                       
-
-                       <div class="rating-minus">
-                           <button class="button-bordernone rating btn__rating-minus" data-index-change="${index}">
-                               <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                               <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
-                               <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
-                           </svg>
-                           </button>
-                       </div>
+                   <div class="rating-minus">
+                       <button class="button-bordernone rating btn__rating-minus" data-index-change="${index}">
+                           <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
+                           <path d="M13.0696 11.6399V13.2955H7.26562V11.6399H13.0696Z" fill="#FF0000"/>
+                       </svg>
+                       </button>
+                   </div>
 
 
-                    </div>
+                </div>
 
-                    <div class="block-result-answer answer-field-${index}"></div>
-                   </div>`; 
-        });         
-        resultComment.innerHTML = out;
-    };
+                <div class="block-result-answer answer-field-${index}"></div>
+               </div>`; 
+       //и тут запишем
+        resultComment.innerHTML += out;
+        //как отрисовали ответ , то теперь имеем блок для отрисовки ответов
+        //вызываем функцию отрисовки и обязательно передаем индекс комента
+        answerContentDraw(index);
+        toggleHeartAnswer(index);
+    });
+    // resultComment.innerHTML = out;
+};
 
-    function timeConverter(UNIX_timestamp) {
-        let a = new Date(UNIX_timestamp * 1000);
-        let months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-        let year = a.getFullYear();
-        let month = months[a.getMonth()];
-        let date = a.getDate();
-        let hour = a.getHours();
-        let min = a.getMinutes();
-        let sec = a.getSeconds();
-        let time = date + '.' + month + ' ' + hour + ':' + min;
-        return time;
-    };
+function timeConverter(UNIX_timestamp) {
+    let a = new Date(UNIX_timestamp * 1000);
+    let months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+    let year = a.getFullYear();
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    let hour = a.getHours();
+    let min = a.getMinutes();
+    let sec = a.getSeconds();
+    let time = date + '.' + month + ' ' + hour + ':' + min;
+    return time;
+};
 
     
 
 
-// вешаем клик на ЛАЙК "В избранное"
+// вешаем клик на ЛАЙК "В избранное" комментов
 
 
 function toggleHeart() {    
@@ -255,6 +269,34 @@ function toggleHeart() {
     });
 };
             
+//  вешаем клик на ЛАЙК "В избранное" ответов
+
+function toggleHeartAnswer(index) {    
+    document.querySelectorAll('.inFavoriteAnswer').forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            let favoriteBtnAnswer = event.target.closest('.inFavoriteAnswer');
+            favoriteBtnAnswer.classList.toggle("toggleHeart");
+            const indexAnswer = favoriteBtnAnswer.getAttribute('data-index-answer');
+
+            if(favoriteBtnAnswer.classList.contains("toggleHeart")) {
+                //перерисрвываем верстку лайка передавая значение тру
+                favoriteBtnAnswer.innerHTML = paintHeart(true);
+                //тут перезаписываем значение лайка в нашем массиве
+                comments[index].answer[indexAnswer].likeAnswer = true;
+            }else if(!favoriteBtnAnswer.classList.contains("toggleHeart")){
+                //перерисрвываем верстку лайка передавая значение фолс
+                favoriteBtnAnswer.innerHTML = paintHeart(false);
+                //тут перезаписываем значение лайка в нашем массиве
+                comments[index].answer[indexAnswer].likeAnswer = false;
+            };
+            //перезаписываем в локальном хранилище данные чтобы были актуальны
+            saveComments();
+        });
+    });
+};
+
+
+
 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
 
 
@@ -340,7 +382,8 @@ function createAnswer() {
                     <button class="submit-answer" type="submit" id="btnAnswer">Ответить</button>
                 </form>`;
 
-                submitAnswer();
+                submitAnswer(indexArrow);
+                toggleHeartAnswer(indexArrow);
                 saveComments();
         });
     });
@@ -368,26 +411,32 @@ function submitAnswer() {
                 favoriteOffAnswer: 'В избранное',
                 ratingScoreAnswer: 0,
             };
-            comAnswers.push(comAnswer);
+            //тут мы кладем ответ в нужный коммент по ключу indexArrow
+            //который мы передали в createAnswer сюда
+            comments[indexArrow].answer.push(comAnswer);
             
-            for(let i = 0; i < comments.length; i++){
-                comments[i].answer = comAnswers;
-            };
-            answerContentDraw();
+            //тут вы каждому ответу добавляете ответ на определенный коммент, так нельзя
+            // for(let i = 0; i < comments.length; i++){
+            //     comments[i].answer = comAnswers;
+            // };
+            //передаем обязательно индекс родителя
+            answerContentDraw(indexArrow);
+            toggleHeartAnswer(indexArrow);
             saveComments();
-            console.table(comments);
         });
     });
 };
 
 //рисуем ответ
 
-function answerContentDraw() {
-
+function answerContentDraw(index) {
     let outAnswer = '';
-
-    comAnswers.forEach(function(item, index){
-      outAnswer = `<div class="image-jun-answer"></div>
+    // drawAnswer тут получаем, мы знаем индекс родителя всегда
+    drawAnswer = document.querySelector(`.answer-field-${index}`); 
+    //в answerComment клажем ответы нужного комментария
+    const answerComment = comments[index].answer
+    answerComment.forEach(function(item, index){
+      outAnswer += `<div class="image-jun-answer"></div>
                     <div class="user-answer">${item.userAnswer}</div>
                     <div class="arrow-answer">
                         <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -397,8 +446,8 @@ function answerContentDraw() {
                     <div class="post-sender-name">${item.userSendAnswer}</div>
                     <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>
                     <p class="text-send-answer">${item.bodyAnswer}</p>
-                    <div class="inFavorite position-like-answer ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
-                            ${paintHeart(item.like)}
+                    <div class="inFavoriteAnswer position-like-answer ${item.likeAnswer ? 'toggleHeart' : ''}" data-index-answer="${index}">
+                            ${paintHeart(item.likeAnswer)}
                     </div>
                     <div class="rating-answer">
                         <div class="rating-plus">

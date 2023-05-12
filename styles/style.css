@@ -415,6 +415,10 @@
     display: flex;
 }
 
+.inFavoriteAnswer {
+    display: flex;
+}
+
 .rating {
     display: flex;
 }
