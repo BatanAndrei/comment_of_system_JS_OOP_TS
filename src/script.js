@@ -511,22 +511,26 @@ function answerContentDraw(index) {
 
 function filterInFavorite() {
     let btnOnlyFavorite = document.querySelector('.header-tabs_heart-button'); 
-
     let currentInFav = document.querySelectorAll('.inFavoriteAnswer');
-        
-    
-    let answerBlockResult = document.querySelectorAll('.container-answer')
+    let answerBlockResult = document.querySelector('.container-answer')
 
 
         btnOnlyFavorite.addEventListener('click', function(){ 
             currentInFav.forEach(function(item){
                         if(!item.classList.contains('toggleHeartAnswer')){
-                            console.log(item)
-                            answerBlockResult.forEach(function(point){
-                                point.dataset['answer'];
+                            
+                            let indexNotFavorite = item.dataset['indexAnswer'];
+
+                            console.log(indexNotFavorite)
+
+                           //answerBlockResult.forEach(function(notFAv){
+                                answerBlockResult.dataset['answer'];
                                
-                                console.log(point)
-                            })  
+                                let notFavorite = document.querySelector(`.container-answer-${indexNotFavorite}`);
+                                notFavorite.classList.add('hideAnswer')
+
+                                console.log(notFavorite)
+                      //  })  
                         }
                    })
         });
