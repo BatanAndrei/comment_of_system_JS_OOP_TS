@@ -533,3 +533,7 @@
     height: 22px;
     margin: 0px 0px 0px 5px;
 }
+
+.hideAnswer {
+    display: none;
+}

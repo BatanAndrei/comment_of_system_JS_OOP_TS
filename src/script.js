@@ -281,13 +281,6 @@ function toggleHeartAnswer(index) {
             favoriteBtnAnswer.classList.toggle("toggleHeartAnswer");
             let indexAnswer = favoriteBtnAnswer.getAttribute('data-index-answer');
 
-          /*   indexArrow = arrowAnswer.getAttribute('data-index-arrow');
-            drawAnswer = document.querySelector(`.answer-field-${indexArrow}`); */
-            //const elCommentInd = document.querySelector(`.answer-field-${index}"`);
-            
-            console.log(index)
-           
-
             if(favoriteBtnAnswer.classList.contains("toggleHeartAnswer")) {
                 //перерисрвываем верстку лайка передавая значение тру
                 favoriteBtnAnswer.innerHTML = paintHeart(true);
@@ -469,7 +462,8 @@ function answerContentDraw(index) {
     //в answerComment клажем ответы нужного комментария
     const answerComment = comments[index].answer
     answerComment.forEach(function(item, index){
-      outAnswer += `<div class="image-jun-answer"></div>
+      outAnswer += `<div data-answer="${index}" class="container-answer container-answer-${index}">
+                    <div class="image-jun-answer"></div>
                     <div class="user-answer">${item.userAnswer}</div>
                     <div class="arrow-answer">
                         <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -504,9 +498,39 @@ function answerContentDraw(index) {
                             </svg>
                             </button>
                         </div>
-                    </div>    `;
+                    </div>    
+                    <div>`;
       
     });
     
     drawAnswer.innerHTML = outAnswer;
 };
+
+
+// создаём фильтр по избанным
+
+function filterInFavorite() {
+    let btnOnlyFavorite = document.querySelector('.header-tabs_heart-button'); 
+
+    let currentInFav = document.querySelectorAll('.inFavoriteAnswer');
+        
+    
+    let answerBlockResult = document.querySelectorAll('.container-answer')
+
+
+        btnOnlyFavorite.addEventListener('click', function(){ 
+            currentInFav.forEach(function(item){
+                        if(!item.classList.contains('toggleHeartAnswer')){
+                            console.log(item)
+                            answerBlockResult.forEach(function(point){
+                                point.dataset['answer'];
+                               
+                                console.log(point)
+                            })  
+                        }
+                   })
+        });
+    };
+
+    filterInFavorite()
+
