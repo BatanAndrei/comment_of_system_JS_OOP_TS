@@ -611,7 +611,6 @@ function localCommentsAnswer() {     // отображаем отсортиро�
 
 
 
-
 // условия отображения по Select (выподающее меню)
 
 function filterSelect(textSelect){
@@ -623,8 +622,6 @@ function filterSelect(textSelect){
         showComments();
         saveCommentsRelevance();
         localCommentsRelevance();
-      /*   showComments();
-        localComments(); */
     }else if(textSelect === 'По количеству оценок'){
         localComments();
         showComments();
