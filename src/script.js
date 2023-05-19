@@ -39,15 +39,19 @@ let select = function() {
 
     selectArrow.addEventListener('click', function() {
         this.classList.toggle('reverse-arrow'); // переварачиваем треугольник svg
+
+       /*  localComments();
         showComments();
+
         saveCommentRating();
         localCommentsRating();
+            
         saveCommentsRelevance();
         localCommentsRelevance();
+            
         saveCommentsAnswer();
-        localCommentsAnswer();
-    });
-
+        localCommentsAnswer(); */
+    })    
 };
 
 select(); 
@@ -635,8 +639,10 @@ function localCommentsAnswer() {     // отображаем отсортиро�
 
 function filterSelect(textSelect){
     if(textSelect === 'По дате'){
-        showComments();
         localComments();
+        showComments();
+        saveCommentsRelevance();
+        localCommentsRelevance();
     }else if(textSelect === 'По актуальности'){
         localComments();
         showComments();
