@@ -548,7 +548,6 @@ function filterInFavorite() {
 
     
     
-
   // фильтр по рейтингу
 
     function saveCommentRating() {      // сортируем и сохраняем рейтинг в Local 
@@ -569,6 +568,50 @@ function filterInFavorite() {
         submitAnswer();
     };
 
+// фильтр по актуальности
+
+function saveCommentsRelevance() {      // сортируем и сохраняем по актуальности в Local 
+    let commRel = comments.sort((a, b) => a.time > b.time ? 1 : -1)
+    localStorage.setItem('commRel', JSON.stringify(commRel));
+    console.log(commRel)
+}
+
+function localCommentsRelevance() {     // отображаем отсортированный по актуальности из Local                                
+    if(localStorage.getItem('commRel')) {
+        comments = JSON.parse(localStorage.getItem('commRel'));
+    }
+    //сначала рисуем
+    showComments();
+    toggleHeart();
+    changeRating();
+    createAnswer();
+    submitAnswer();
+};
+
+
+// фильтр по колличеству ответов
+
+function saveCommentsAnswer() {      // сортируем и сохраняем по колличеству ответов в Local 
+    let commAns = comments.sort((a, b) => a.answer > b.answer ? 1 : -1)
+    localStorage.setItem('commAns', JSON.stringify(commAns));
+    console.log(commAns)
+}
+
+function localCommentsAnswer() {     // отображаем отсортированный по колличеству ответов из Local                                
+    if(localStorage.getItem('commAns')) {
+        comments = JSON.parse(localStorage.getItem('commAns'));
+    }
+    //сначала рисуем
+    showComments();
+    toggleHeart();
+    changeRating();
+    createAnswer();
+    submitAnswer();
+};
+
+
+
+
 // условия отображения по Select (выподающее меню)
 
 function filterSelect(textSelect){
@@ -576,13 +619,22 @@ function filterSelect(textSelect){
         showComments();
         localComments();
     }else if(textSelect === 'По актуальности'){
-        showComments();
         localComments();
+        showComments();
+        saveCommentsRelevance();
+        localCommentsRelevance();
+      /*   showComments();
+        localComments(); */
     }else if(textSelect === 'По количеству оценок'){
+        localComments();
         showComments();
         saveCommentRating();
         localCommentsRating();
-        
+    }else if(textSelect === 'По количеству ответов'){
+        localComments();
+        showComments();
+        saveCommentsAnswer();
+        localCommentsAnswer();
     }
 }
 
