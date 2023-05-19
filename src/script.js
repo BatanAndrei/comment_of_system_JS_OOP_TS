@@ -512,11 +512,9 @@ function answerContentDraw(index) {
 
 function filterInFavorite() {
     let btnOnlyFavorite = document.querySelector('.header-tabs_heart-button'); 
-    /* let currentInFav = document.querySelectorAll('.inFavoriteAnswer');
-    let answerBlockResult = document.querySelector('.container-answer'); */
+   
         btnOnlyFavorite.addEventListener('click', function(){ 
-            //showComments();
-            //localStorage.clear();
+         
             saveCommentsFavorite()
             localCommentsFavorite()
         });
@@ -524,15 +522,18 @@ function filterInFavorite() {
 
     filterInFavorite()
 
+// записываем в Local только в избранном
 
     function saveCommentsFavorite() {     
         
         let commFav = comments.filter(item => item.like  === true)
-        localStorage.setItem('commFav', JSON.stringify(commFav));                   // сохраняем в Local  
+        localStorage.setItem('commFav', JSON.stringify(commFav));                     
     };
 
 
-    function localCommentsFavorite() {                                  // отображаем из Local
+    // отображаем из Local только в избранном
+
+    function localCommentsFavorite() {                                  
         if(localStorage.getItem('commFav')) {
             comments = JSON.parse(localStorage.getItem('commFav'));
         }
