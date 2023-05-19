@@ -39,6 +39,13 @@ let select = function() {
 
     selectArrow.addEventListener('click', function() {
         this.classList.toggle('reverse-arrow'); // переварачиваем треугольник svg
+        showComments();
+        saveCommentRating();
+        localCommentsRating();
+        saveCommentsRelevance();
+        localCommentsRelevance();
+        saveCommentsAnswer();
+        localCommentsAnswer();
     });
 
 };
@@ -442,10 +449,6 @@ function submitAnswer() {
             //который мы передали в createAnswer сюда
             comments[indexArrow].answer.push(comAnswer);
             
-            //тут вы каждому ответу добавляете ответ на определенный коммент, так нельзя
-            // for(let i = 0; i < comments.length; i++){
-            //     comments[i].answer = comAnswers;
-            // };
             //передаем обязательно индекс родителя
             answerContentDraw(indexArrow);
             toggleHeartAnswer(indexArrow);
@@ -551,9 +554,15 @@ function filterInFavorite() {
   // фильтр по рейтингу
 
     function saveCommentRating() {      // сортируем и сохраняем рейтинг в Local 
-        let commRat = comments.sort((a, b) => a.ratingScore > b.ratingScore ? 1 : -1)
-        localStorage.setItem('commRat', JSON.stringify(commRat));
-        console.log(commRat)
+        let reverseRating = document.querySelector('.svg-arrow');
+        let commRat = comments.sort((a, b) => a.ratingScore > b.ratingScore ? 1 : -1);
+
+        if(!reverseRating.classList.contains('reverse-arrow')){
+            localStorage.setItem('commRat', JSON.stringify(commRat));
+        }else{
+            commRat.reverse();
+            localStorage.setItem('commRat', JSON.stringify(commRat));
+        }
     }
 
     function localCommentsRating() {     // отображаем отсортированный рейтинг из Local                                
@@ -571,11 +580,17 @@ function filterInFavorite() {
 // фильтр по актуальности
 
 function saveCommentsRelevance() {      // сортируем и сохраняем по актуальности в Local 
+    let reverseRating = document.querySelector('.svg-arrow');
     let commRel = comments.sort((a, b) => a.time > b.time ? 1 : -1)
-    localStorage.setItem('commRel', JSON.stringify(commRel));
-    console.log(commRel)
-}
 
+    if(!reverseRating.classList.contains('reverse-arrow')){
+        localStorage.setItem('commRel', JSON.stringify(commRel));
+    }else{
+        commRel.reverse();
+        localStorage.setItem('commRel', JSON.stringify(commRel));
+    }
+}
+        
 function localCommentsRelevance() {     // отображаем отсортированный по актуальности из Local                                
     if(localStorage.getItem('commRel')) {
         comments = JSON.parse(localStorage.getItem('commRel'));
@@ -592,9 +607,15 @@ function localCommentsRelevance() {     // отображаем отсортир
 // фильтр по колличеству ответов
 
 function saveCommentsAnswer() {      // сортируем и сохраняем по колличеству ответов в Local 
+    let reverseRating = document.querySelector('.svg-arrow');
     let commAns = comments.sort((a, b) => a.answer > b.answer ? 1 : -1)
-    localStorage.setItem('commAns', JSON.stringify(commAns));
-    console.log(commAns)
+
+    if(!reverseRating.classList.contains('reverse-arrow')){
+        localStorage.setItem('commAns', JSON.stringify(commAns));
+    }else{
+        commAns.reverse();
+        localStorage.setItem('commAns', JSON.stringify(commAns));
+    }
 }
 
 function localCommentsAnswer() {     // отображаем отсортированный по колличеству ответов из Local                                
@@ -608,7 +629,6 @@ function localCommentsAnswer() {     // отображаем отсортиро�
     createAnswer();
     submitAnswer();
 };
-
 
 
 // условия отображения по Select (выподающее меню)
