@@ -509,7 +509,7 @@ function answerContentDraw(index) {
 };
 
 
-// создаём фильтр по избанным
+// создаём отображение только по избанным
 
 function filterInFavorite() {
     let btnOnlyFavorite = document.querySelector('.header-tabs_heart-button'); 
@@ -547,17 +547,17 @@ function filterInFavorite() {
     };
 
     
-    //localCommentsFavorite();
+    
 
-  //сортировка рейтинга
+  // фильтр по рейтингу
 
-    function saveCommentRating() {
+    function saveCommentRating() {      // сортируем и сохраняем рейтинг в Local 
         let commRat = comments.sort((a, b) => a.ratingScore > b.ratingScore ? 1 : -1)
         localStorage.setItem('commRat', JSON.stringify(commRat));
         console.log(commRat)
     }
 
-    function localCommentsRating() {                                  
+    function localCommentsRating() {     // отображаем отсортированный рейтинг из Local                                
         if(localStorage.getItem('commRat')) {
             comments = JSON.parse(localStorage.getItem('commRat'));
         }
@@ -569,7 +569,7 @@ function filterInFavorite() {
         submitAnswer();
     };
 
-// фильтр по Select (выподающее меню)
+// условия отображения по Select (выподающее меню)
 
 function filterSelect(textSelect){
     if(textSelect === 'По дате'){
