@@ -25,6 +25,7 @@ let select = function() {
         let currentText = select.querySelector('.header-tabs_select-current'); // записываем то что у нас в .header-tabs_select-current
         currentText.innerText = text; //записываем в .header-tabs_select-current то что у нас в text
         select.classList.remove('is-active'); // убираем .is-active и .header-tabs_select-body пропадает
+        filterSelect(text);
 
         removeCheckMarkClass(); //убираем галочку
         this.classList.add('check-mark'); // дабавляем галочку на выбранный пункт
@@ -133,7 +134,7 @@ document.getElementById('comment-send').onclick = function() {
         changeRating();
         createAnswer();
         submitAnswer();
-        filterInFavorite()
+        filterInFavorite();
     } 
 };
 
@@ -157,7 +158,7 @@ function localComments() {                                  // отобража�
     submitAnswer();
     
 };
-//filterInFavorite()
+
 localComments();    
 
 function showComments() {                                    // рисуем отправленный коммент
@@ -522,16 +523,16 @@ function filterInFavorite() {
 
     filterInFavorite()
 
-// записываем в Local только в избранном
+// записываем в Local только в избранное
 
     function saveCommentsFavorite() {     
         
         let commFav = comments.filter(item => item.like  === true)
-        localStorage.setItem('commFav', JSON.stringify(commFav));                     
+        localStorage.setItem('commFav', JSON.stringify(commFav));                   
     };
 
 
-    // отображаем из Local только в избранном
+    // отображаем из Local только в избранное
 
     function localCommentsFavorite() {                                  
         if(localStorage.getItem('commFav')) {
@@ -545,6 +546,44 @@ function filterInFavorite() {
         submitAnswer();
     };
 
-    localCommentsFavorite()
+    
+    //localCommentsFavorite();
+
+  //сортировка рейтинга
+
+    function saveCommentRating() {
+        let commRat = comments.sort((a, b) => a.ratingScore > b.ratingScore ? 1 : -1)
+        localStorage.setItem('commRat', JSON.stringify(commRat));
+        console.log(commRat)
+    }
+
+    function localCommentsRating() {                                  
+        if(localStorage.getItem('commRat')) {
+            comments = JSON.parse(localStorage.getItem('commRat'));
+        }
+        //сначала рисуем
+        showComments();
+        toggleHeart();
+        changeRating();
+        createAnswer();
+        submitAnswer();
+    };
+
+// фильтр по Select (выподающее меню)
+
+function filterSelect(textSelect){
+    if(textSelect === 'По дате'){
+        showComments();
+        localComments();
+    }else if(textSelect === 'По актуальности'){
+        showComments();
+        localComments();
+    }else if(textSelect === 'По количеству оценок'){
+        showComments();
+        saveCommentRating();
+        localCommentsRating();
+        
+    }
+}
 
 
