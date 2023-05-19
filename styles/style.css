@@ -21,12 +21,12 @@
     display: flex;
     margin-top: 40px;
     max-width: 1440px;
-    height: 1302px;
+    max-height: 9302px;
 }
 
 .content-left_main {
     width: 203px;
-    height: 1302px;
+    max-height: 9002px;
     background-color: #D9D9D9;
 }
 
@@ -61,7 +61,6 @@
     width: 1022px;
     height: 720px;
     margin-top: 40px;
-    border: 1px dashed black;
 }
 
 .content-right_main-bottom-hr {

@@ -133,6 +133,7 @@ document.getElementById('comment-send').onclick = function() {
         changeRating();
         createAnswer();
         submitAnswer();
+        filterInFavorite()
     } 
 };
 
@@ -156,7 +157,7 @@ function localComments() {                                  // отобража�
     submitAnswer();
     
 };
-
+//filterInFavorite()
 localComments();    
 
 function showComments() {                                    // рисуем отправленный коммент
@@ -511,30 +512,38 @@ function answerContentDraw(index) {
 
 function filterInFavorite() {
     let btnOnlyFavorite = document.querySelector('.header-tabs_heart-button'); 
-    let currentInFav = document.querySelectorAll('.inFavoriteAnswer');
-    let answerBlockResult = document.querySelector('.container-answer')
-
-
+    /* let currentInFav = document.querySelectorAll('.inFavoriteAnswer');
+    let answerBlockResult = document.querySelector('.container-answer'); */
         btnOnlyFavorite.addEventListener('click', function(){ 
-            currentInFav.forEach(function(item){
-                        if(!item.classList.contains('toggleHeartAnswer')){
-                            
-                            let indexNotFavorite = item.dataset['indexAnswer'];
-
-                            console.log(indexNotFavorite)
-
-                           //answerBlockResult.forEach(function(notFAv){
-                                answerBlockResult.dataset['answer'];
-                               
-                                let notFavorite = document.querySelector(`.container-answer-${indexNotFavorite}`);
-                                notFavorite.classList.add('hideAnswer')
-
-                                console.log(notFavorite)
-                      //  })  
-                        }
-                   })
+            //showComments();
+            //localStorage.clear();
+            saveCommentsFavorite()
+            localCommentsFavorite()
         });
     };
 
     filterInFavorite()
+
+
+    function saveCommentsFavorite() {     
+        
+        let commFav = comments.filter(item => item.like  === true)
+        localStorage.setItem('commFav', JSON.stringify(commFav));                   // сохраняем в Local  
+    };
+
+
+    function localCommentsFavorite() {                                  // отображаем из Local
+        if(localStorage.getItem('commFav')) {
+            comments = JSON.parse(localStorage.getItem('commFav'));
+        }
+        //сначала рисуем
+        showComments();
+        toggleHeart();
+        changeRating();
+        createAnswer();
+        submitAnswer();
+    };
+
+    localCommentsFavorite()
+
 
