@@ -2,7 +2,7 @@
   "name": "system_of_comment_tp_oop",
   "version": "1.0.0",
   "description": "commentary system for site - treining",
-  "main": "script.js",
+  "main": "mainComments.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "",

@@ -2,7 +2,7 @@
 
 // создание селекта
 
-    function select() {
+function select() {
         let selectHeader = document.querySelectorAll('.header-tabs_select-header');
         let selectItem = document.querySelectorAll('.header-tabs_select-item');
         let selectArrow = document.querySelector('.svg-arrow');
