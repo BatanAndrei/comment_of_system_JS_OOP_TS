@@ -2,10 +2,10 @@ class NavigationBar {
     selectHeader: NodeListOf<Element>;
     selectItem: NodeListOf<Element>;
     selectArrow: Element | null;
-    text?: Element | null;
+    text?: Text;
     select: Element | null;
     currentText: any;
-    innerText: any;
+    innerText?: Text;
     parentElement: any;
     closest: any;
     classList: any;
@@ -43,7 +43,7 @@ class NavigationBar {
         //this.filterSelect(this.text);
         navBar.removeCheckMarkClass();
         this.classList.add('check-mark'); // дабавляем галочку на выбранный пункт
-        console.log(this.innerText)
+        console.log(this.text)
     };
 
     public removeCheckMarkClass() {
