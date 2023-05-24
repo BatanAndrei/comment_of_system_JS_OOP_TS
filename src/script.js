@@ -2,10 +2,10 @@
 
 // создание селекта
 
-let select = function() {
-    let selectHeader = document.querySelectorAll('.header-tabs_select-header');
-    let selectItem = document.querySelectorAll('.header-tabs_select-item');
-    let selectArrow = document.querySelector('.svg-arrow');
+    function select() {
+        let selectHeader = document.querySelectorAll('.header-tabs_select-header');
+        let selectItem = document.querySelectorAll('.header-tabs_select-item');
+        let selectArrow = document.querySelector('.svg-arrow');
 
     selectHeader.forEach(item => {
         item.addEventListener('click', selectToggle); // переключаем класс .is-active у .header-tabs_select показывая .header-tabs_select-body.
@@ -17,7 +17,7 @@ let select = function() {
 
     function selectToggle() {     //переключает .is-active у родителя .header-tabs_select-header (т.е. у .header-tabs_select)
         this.parentElement.classList.toggle('is-active'); // а .header-tabs_select имея чайлд .header-tabs_select-body, показывает его.
-};
+    };
 
     function selectChoose() {
         let text = this.innerText; //записываем в text пункт на который мы нажимаем
@@ -39,18 +39,6 @@ let select = function() {
 
     selectArrow.addEventListener('click', function() {
         this.classList.toggle('reverse-arrow'); // переварачиваем треугольник svg
-
-       /*  localComments();
-        showComments();
-
-        saveCommentRating();
-        localCommentsRating();
-            
-        saveCommentsRelevance();
-        localCommentsRelevance();
-            
-        saveCommentsAnswer();
-        localCommentsAnswer(); */
     })    
 };
 
@@ -255,10 +243,7 @@ function timeConverter(UNIX_timestamp) {
 };
 
     
-
-
 // вешаем клик на ЛАЙК "В избранное" комментов
-
 
 function toggleHeart() {    
     document.querySelectorAll('.inFavorite').forEach(function(item) {
@@ -312,9 +297,7 @@ function toggleHeartAnswer(index) {
 };
 
 
-
 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
-
 
 function paintHeart(like){
     let htmlHeart = ''; 
@@ -404,9 +387,9 @@ function changeRatingAnswer(index) {
     });
 };
 
+
 // вешаем клик на ОТВЕТ
 
-        
 function createAnswer() {
     document.querySelectorAll('.btn-answer').forEach(function(item){
         item.addEventListener('click', function(event){
@@ -430,8 +413,6 @@ function createAnswer() {
     
 
 // снимаем submit с кнопки "Ответить" - preventDefault();
-
-
 
 function submitAnswer() {
     document.querySelectorAll('.submit-answer').forEach(function(item){  
@@ -462,6 +443,7 @@ function submitAnswer() {
     });
 };
 
+
 //рисуем ответ
 
 function answerContentDraw(index) {
@@ -482,9 +464,11 @@ function answerContentDraw(index) {
                     <div class="post-sender-name">${item.userSendAnswer}</div>
                     <div class="text-date-answer">${timeConverter(item.timeAnswer)}</div>
                     <p class="text-send-answer">${item.bodyAnswer}</p>
+
                     <div class="inFavoriteAnswer position-like-answer ${item.likeAnswer ? 'toggleHeartAnswer' : ''}" data-index-answer="${index}">
                             ${paintHeart(item.likeAnswer)}
                     </div>
+
                     <div class="rating-answer-area">
                         <div class="rating-plus">
                             <button class="button-bordernone rating-answer btn__rating-plus-answer" data-index-change-answer="${index}">
@@ -495,10 +479,8 @@ function answerContentDraw(index) {
                             </button>
                         </div>
 
-                       
                         <h3 class="toolbar-sent_text-rating rating-text-answer${index}">${item.ratingScoreAnswer}</h3>
                        
-
                         <div class="rating-minus">
                             <button class="button-bordernone rating-answer btn__rating-minus-answer" data-index-change-answer="${index}">
                                 <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -530,6 +512,7 @@ function filterInFavorite() {
 
     filterInFavorite()
 
+
 // записываем в Local только в избранное
 
     function saveCommentsFavorite() {     
@@ -553,7 +536,6 @@ function filterInFavorite() {
         submitAnswer();
     };
 
-    
     
   // фильтр по рейтингу
 
@@ -581,6 +563,7 @@ function filterInFavorite() {
         submitAnswer();
     };
 
+    
 // фильтр по актуальности
 
 function saveCommentsRelevance() {      // сортируем и сохраняем по актуальности в Local 
