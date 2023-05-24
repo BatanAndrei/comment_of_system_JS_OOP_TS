@@ -3,8 +3,8 @@ var NavigationBar = /** @class */ (function () {
         this.selectHeader = document.querySelectorAll('.header-tabs_select-header');
         this.selectItem = document.querySelectorAll('.header-tabs_select-item');
         this.selectArrow = document.querySelector('.svg-arrow');
-        this.select = this.select;
-        this.text = '';
+        this.select = document.querySelector('.header-tabs_select-current');
+        this.text = this.text;
         this.innerText = this.innerText;
         this.currentText = this.currentText;
     }
@@ -22,14 +22,16 @@ var NavigationBar = /** @class */ (function () {
     };
     ;
     NavigationBar.prototype.selectChoose = function () {
+        var _a, _b;
         this.text = this.innerText; //записываем в text пункт на который мы нажимаем
         this.select = this.closest('.header-tabs_select'); // возвращает ближайший родительский элемент (или сам элемент - .header-tabs_select)
-        this.currentText = this.select.querySelector('.header-tabs_select-current'); // записываем то что у нас в .header-tabs_select-current
+        this.currentText = (_a = this.select) === null || _a === void 0 ? void 0 : _a.querySelector('.header-tabs_select-current'); // записываем то что у нас в .header-tabs_select-current
         this.currentText.innerText = this.text; //записываем в .header-tabs_select-current то что у нас в text
-        this.select.classList.remove('is-active'); // убираем .is-active и .header-tabs_select-body пропадает
+        (_b = this.select) === null || _b === void 0 ? void 0 : _b.classList.remove('is-active'); // убираем .is-active и .header-tabs_select-body пропадает
         //this.filterSelect(this.text);
         navBar.removeCheckMarkClass();
         this.classList.add('check-mark'); // дабавляем галочку на выбранный пункт
+        console.log(this.innerText);
     };
     ;
     NavigationBar.prototype.removeCheckMarkClass = function () {
