@@ -9,7 +9,6 @@ class NavigationBar {
     parentElement: any;
     closest: any;
     classList: any;
-    this: any;
 
     constructor() {
         this.selectHeader  = document.querySelectorAll('.header-tabs_select-header');
@@ -52,13 +51,14 @@ class NavigationBar {
         });
     };
 
-   /*  public reverseArrow() {
-        this.selectArrow.addEventListener('click', function(): void {
+    public reverseArrow() {
+        this.selectArrow?.addEventListener('click', function(this: any): void {
             this.classList.toggle('reverse-arrow'); // переварачиваем треугольник svg
         })
-    } */
+    } 
 }
 
 let navBar = new NavigationBar();
 navBar.selectitems();
+navBar.reverseArrow();
 

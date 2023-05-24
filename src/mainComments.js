@@ -38,7 +38,14 @@ var NavigationBar = /** @class */ (function () {
         });
     };
     ;
+    NavigationBar.prototype.reverseArrow = function () {
+        var _a;
+        (_a = this.selectArrow) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+            this.classList.toggle('reverse-arrow'); // переварачиваем треугольник svg
+        });
+    };
     return NavigationBar;
 }());
 var navBar = new NavigationBar();
 navBar.selectitems();
+navBar.reverseArrow();
