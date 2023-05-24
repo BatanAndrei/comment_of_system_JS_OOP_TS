@@ -2,11 +2,11 @@ class NavigationBar {
     selectHeader: NodeListOf<Element>;
     selectItem: NodeListOf<Element>;
     selectArrow: Element | null;
-    text?: Text;
+    text?: Element | null;
     select: Element | null;
     currentText: any;
-    innerText?: Text;
-    parentElement: any;
+    innerText?: Element | null;
+    parentElement?: Element | null;
     closest: any;
     classList: any;
 
@@ -31,7 +31,7 @@ class NavigationBar {
      }
 
     public selectToggle() {     //переключает .is-active у родителя .header-tabs_select-header (т.е. у .header-tabs_select)
-        this.parentElement.classList.toggle('is-active'); // а .header-tabs_select имея чайлд .header-tabs_select-body, показывает его.
+        this.parentElement?.classList.toggle('is-active'); // а .header-tabs_select имея чайлд .header-tabs_select-body, показывает его.
     };
 
     public selectChoose() {
@@ -42,7 +42,7 @@ class NavigationBar {
         this.select?.classList.remove('is-active'); // убираем .is-active и .header-tabs_select-body пропадает
         //this.filterSelect(this.text);
         navBar.removeCheckMarkClass();
-        this.classList.add('check-mark'); // дабавляем галочку на выбранный пункт
+        this.classList?.add('check-mark'); // дабавляем галочку на выбранный пункт
         console.log(this.text)
     };
 
