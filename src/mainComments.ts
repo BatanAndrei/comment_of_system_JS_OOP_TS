@@ -43,7 +43,7 @@ class NavigationBar {
         //this.filterSelect(this.text);
         navBar.removeCheckMarkClass();
         this.classList?.add('check-mark'); // дабавляем галочку на выбранный пункт
-        console.log(this.text)
+        
     };
 
     public removeCheckMarkClass() {

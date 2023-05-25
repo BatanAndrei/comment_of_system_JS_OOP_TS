@@ -18,11 +18,12 @@ var NavigationBar = /** @class */ (function () {
         });
     };
     NavigationBar.prototype.selectToggle = function () {
-        this.parentElement.classList.toggle('is-active'); // а .header-tabs_select имея чайлд .header-tabs_select-body, показывает его.
+        var _a;
+        (_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.classList.toggle('is-active'); // а .header-tabs_select имея чайлд .header-tabs_select-body, показывает его.
     };
     ;
     NavigationBar.prototype.selectChoose = function () {
-        var _a, _b;
+        var _a, _b, _c;
         this.text = this.innerText; //записываем в text пункт на который мы нажимаем
         this.select = this.closest('.header-tabs_select'); // возвращает ближайший родительский элемент (или сам элемент - .header-tabs_select)
         this.currentText = (_a = this.select) === null || _a === void 0 ? void 0 : _a.querySelector('.header-tabs_select-current'); // записываем то что у нас в .header-tabs_select-current
@@ -30,8 +31,7 @@ var NavigationBar = /** @class */ (function () {
         (_b = this.select) === null || _b === void 0 ? void 0 : _b.classList.remove('is-active'); // убираем .is-active и .header-tabs_select-body пропадает
         //this.filterSelect(this.text);
         navBar.removeCheckMarkClass();
-        this.classList.add('check-mark'); // дабавляем галочку на выбранный пункт
-        console.log(this.text);
+        (_c = this.classList) === null || _c === void 0 ? void 0 : _c.add('check-mark'); // дабавляем галочку на выбранный пункт
     };
     ;
     NavigationBar.prototype.removeCheckMarkClass = function () {
