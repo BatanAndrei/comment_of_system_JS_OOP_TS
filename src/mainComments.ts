@@ -46,7 +46,17 @@ public commentContent() {
         inputF.count.innerText = `Макс. ${inputF.limit} символов`;     // обнуляем при клике счётчик символов
         inputF.btn.style.backgroundColor = '#dbd7d7';           // обнуляем стиль счётчика
         this.commentBody.value = '';
-}
+
+        if(this.comment.body.length != '' && this.comment.body.length <= inputF.limit) {
+            this.comments.push(this.comment);
+
+            comm.saveComments();
+        }
+    }
+
+public saveComments() {     
+    localStorage.setItem('comments', JSON.stringify(this.comments));                    // сохраняем в Local  
+};
 }
 
 let comm = new mainComments();

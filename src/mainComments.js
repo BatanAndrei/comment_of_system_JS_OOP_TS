@@ -39,7 +39,15 @@ var mainComments = /** @class */ (function () {
         inputF.count.innerText = "\u041C\u0430\u043A\u0441. ".concat(inputF.limit, " \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"); // обнуляем при клике счётчик символов
         inputF.btn.style.backgroundColor = '#dbd7d7'; // обнуляем стиль счётчика
         this.commentBody.value = '';
+        if (this.comment.body.length != '' && this.comment.body.length <= inputF.limit) {
+            this.comments.push(this.comment);
+            comm.saveComments();
+        }
     };
+    mainComments.prototype.saveComments = function () {
+        localStorage.setItem('comments', JSON.stringify(this.comments)); // сохраняем в Local  
+    };
+    ;
     return mainComments;
 }());
 var comm = new mainComments();
