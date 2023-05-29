@@ -1,18 +1,18 @@
 var InputField = /** @class */ (function () {
     function InputField() {
         this.textlength = 0;
+        this.value = '';
         this.count = document.querySelector('.count-comment-body');
         this.message = document.querySelector('.text-long-message');
         this.textarea = document.querySelector('#comment-body');
         this.btn = document.querySelector('.button');
-        this.limit = 10;
+        this.limit = 1000;
     }
     ;
-    InputField.prototype.auto_grow = function (element) {
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight) + "px";
-    };
-    ;
+    /*  public auto_grow(element: any): void {     //увеличиваем размер поля ввода комментов
+         element.style.height = "5px";
+         element.style.height = (element.scrollHeight)+"px";
+     }; */
     InputField.prototype.validateTextarea = function () {
         var _this = this;
         this.textarea.addEventListener('input', function () {
@@ -23,7 +23,6 @@ var InputField = /** @class */ (function () {
                 _this.count.style.color = '#FF0000';
                 _this.message.innerText = "\u0421\u043B\u0438\u0448\u043A\u043E\u043C \u0434\u043B\u0438\u043D\u043D\u043E\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435";
                 _this.message.style.color = '#FF0000';
-                console.log(_this.innerText);
                 _this.btn.style.backgroundColor = '#dbd7d7';
                 _this.btn.style.color = '#918d8d';
             }
@@ -46,6 +45,6 @@ var InputField = /** @class */ (function () {
     };
     return InputField;
 }());
-var mainComments = new InputField();
-mainComments.validateTextarea();
-mainComments.auto_grow(this);
+var inputF = new InputField();
+inputF.validateTextarea();
+//inputF.auto_grow(this);

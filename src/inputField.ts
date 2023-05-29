@@ -5,8 +5,8 @@ class InputField {
     btn: any;
     limit: number;
     textlength: number = 0;
-    innerText?: undefined;
-    value: any;
+    innerText?: any;
+    value: string = '';
 
     constructor() {
         this.count = document.querySelector('.count-comment-body');
@@ -14,13 +14,12 @@ class InputField {
         this.textarea = document.querySelector('#comment-body');
         this.btn = document.querySelector('.button');
         this.limit = 1000; 
-        
     };
 
-    public auto_grow(element: any): void {     //увеличиваем размер поля ввода комментов
+   /*  public auto_grow(element: any): void {     //увеличиваем размер поля ввода комментов
         element.style.height = "5px";
         element.style.height = (element.scrollHeight)+"px";
-    };
+    }; */
 
     public validateTextarea() {
         this.textarea.addEventListener('input', () => {
@@ -33,7 +32,6 @@ class InputField {
     
             this.message.innerText = `Слишком длинное сообщение`
             this.message.style.color = '#FF0000';
-            console.log(this.innerText)
     
             this.btn.style.backgroundColor = '#dbd7d7';
             this.btn.style.color = '#918d8d';
@@ -58,6 +56,6 @@ class InputField {
 }
 }
 
-let mainComments = new InputField();
-mainComments.validateTextarea();
-mainComments.auto_grow(this)
+let inputF = new InputField();
+inputF.validateTextarea();
+//inputF.auto_grow(this);

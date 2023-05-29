@@ -1,0 +1,54 @@
+class mainComments {
+    comments: string[] = [];
+    comAnswers: string[] = [];
+    
+    arrowAnswer: string = '';
+    indexArrow: string = '';
+    drawAnswer: string = '';
+    commentBody: Element | null;
+    commentSend: Element | null;
+    comment: any;
+    answer: string[] = [];
+    body: any;
+    time: number = Math.floor(Date.now() / 1000);
+    userSend: string = './images/Max.png';
+    photoSend: string = 'Максим Авдеенко';
+    like: boolean = false;
+    favoriteOff: string = 'В избранное';
+    ratingScore: number = 0;
+    value: string = '';
+    
+           
+    constructor() {
+        this.commentBody = document.getElementById('comment-body')
+        this.commentSend = document.getElementById('comment-send');
+        this.comment = comm;    
+    }
+
+public sending() {
+    this.commentSend?.addEventListener('click', function() {
+        event?.preventDefault();
+        comm.commentContent();
+    })
+}
+
+public commentContent() {
+        this.comment = {
+            answer: [],
+            body: this.commentBody?.value,
+            time: Math.floor(Date.now() / 1000),
+            userSend: 'Максим Авдеенко',
+            photoSend: './images/Max.png',
+            like: false,
+            favoriteOff: 'В избранное',
+            ratingScore: 0
+        };
+        console.log(this.comment)
+
+}
+}
+
+let comm = new mainComments();
+comm.sending();
+
+
