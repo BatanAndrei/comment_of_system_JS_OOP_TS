@@ -19,13 +19,12 @@ class mainComments {
     ratingScore: number = 0;
     value: Element | null | string = '';
     out: string = '';
- 
-
-           
+    closest: any;
+       
     constructor() {
         this.commentBody = document.getElementById('comment-body')
         this.commentSend = document.getElementById('comment-send');
-        this.comment = comm;   
+        this.comment = this.comment;   
         this.resultComment = document.getElementById('result-comment');
         
     }
@@ -57,6 +56,8 @@ public commentContent() {
             this.comments.push(this.comment);
             comm.showComments();
             comm.saveComments();
+            comm.toggleHeart();
+            comm.changeRating();
         }
     }
 
@@ -69,6 +70,8 @@ public localComments() {                                  // отображае�
         this.comments = JSON.parse(localStorage.getItem('comments') || '{}');
     }
     comm.showComments();
+    comm.toggleHeart();
+    comm.changeRating();
 }
 
 public showComments() {
@@ -193,6 +196,51 @@ public paintHeart(like: any){
         <h3 class="toolbar-sent_text">В избранное</h3>`;
     };
     return htmlHeart;
+};
+
+public toggleHeart() {    
+    document.querySelectorAll('.inFavorite').forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            let favoriteBtn: HTMLElement | null = event.target!.closest('.inFavorite');
+            favoriteBtn!.classList.toggle("toggleHeart");
+            const index: any = favoriteBtn!.getAttribute('data-index');
+            console.log(index)
+
+            if(favoriteBtn!.classList.contains("toggleHeart")) {
+                //перерисрвываем верстку лайка передавая значение тру
+                favoriteBtn!.innerHTML = comm.paintHeart(true);
+                //тут перезаписываем значение лайка в нашем массиве
+                comm.comments[index].like = true;
+            }else if(!favoriteBtn!.classList.contains("toggleHeart")){
+                //перерисрвываем верстку лайка передавая значение фолс
+                favoriteBtn!.innerHTML = comm.paintHeart(false);
+                //тут перезаписываем значение лайка в нашем массиве
+                comm.comments[index].like = false;
+            };
+            //перезаписываем в локальном хранилище данные чтобы были актуальны
+            comm.saveComments();
+        });
+    });
+};
+
+public changeRating() {   
+    document.querySelectorAll('.rating').forEach(function(item) {
+        item.addEventListener("click", function(event) {    
+            const btn = event.target!.closest('.rating');
+            const indRat = btn.getAttribute('data-index-change');
+
+            if(btn.classList.contains('btn__rating-plus')){
+                comm.comments[indRat].ratingScore++;
+            };
+            if(btn.classList.contains('btn__rating-minus')){
+                comm.comments[indRat].ratingScore--;
+            };
+            document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
+            
+            
+            comm.saveComments();
+        });
+    });
 };
 }
 

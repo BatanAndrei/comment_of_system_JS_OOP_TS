@@ -5,7 +5,7 @@ class InputField {
     btn: any;
     limit: number;
     textlength: number = 0;
-    innerText?: any;
+    innerText?: Element | null;
     value: string = '';
 
     constructor() {
@@ -15,11 +15,6 @@ class InputField {
         this.btn = document.querySelector('.button');
         this.limit = 1000; 
     };
-
-   /*  public auto_grow(element: any): void {     //увеличиваем размер поля ввода комментов
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight)+"px";
-    }; */
 
     public validateTextarea() {
         this.textarea.addEventListener('input', () => {
@@ -58,4 +53,3 @@ class InputField {
 
 let inputF = new InputField();
 inputF.validateTextarea();
-//inputF.auto_grow(this);

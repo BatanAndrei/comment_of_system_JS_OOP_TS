@@ -16,7 +16,7 @@ var mainComments = /** @class */ (function () {
         this.out = '';
         this.commentBody = document.getElementById('comment-body');
         this.commentSend = document.getElementById('comment-send');
-        this.comment = comm;
+        this.comment = this.comment;
         this.resultComment = document.getElementById('result-comment');
     }
     mainComments.prototype.sending = function () {
@@ -45,6 +45,8 @@ var mainComments = /** @class */ (function () {
             this.comments.push(this.comment);
             comm.showComments();
             comm.saveComments();
+            comm.toggleHeart();
+            comm.changeRating();
         }
     };
     mainComments.prototype.saveComments = function () {
@@ -56,6 +58,8 @@ var mainComments = /** @class */ (function () {
             this.comments = JSON.parse(localStorage.getItem('comments') || '{}');
         }
         comm.showComments();
+        comm.toggleHeart();
+        comm.changeRating();
     };
     mainComments.prototype.showComments = function () {
         this.resultComment.innerHTML = '';
@@ -101,6 +105,51 @@ var mainComments = /** @class */ (function () {
         }
         ;
         return htmlHeart;
+    };
+    ;
+    mainComments.prototype.toggleHeart = function () {
+        document.querySelectorAll('.inFavorite').forEach(function (item) {
+            item.addEventListener("click", function (event) {
+                var favoriteBtn = event.target.closest('.inFavorite');
+                favoriteBtn.classList.toggle("toggleHeart");
+                var index = favoriteBtn.getAttribute('data-index');
+                console.log(index);
+                if (favoriteBtn.classList.contains("toggleHeart")) {
+                    //перерисрвываем верстку лайка передавая значение тру
+                    favoriteBtn.innerHTML = comm.paintHeart(true);
+                    //тут перезаписываем значение лайка в нашем массиве
+                    comm.comments[index].like = true;
+                }
+                else if (!favoriteBtn.classList.contains("toggleHeart")) {
+                    //перерисрвываем верстку лайка передавая значение фолс
+                    favoriteBtn.innerHTML = comm.paintHeart(false);
+                    //тут перезаписываем значение лайка в нашем массиве
+                    comm.comments[index].like = false;
+                }
+                ;
+                //перезаписываем в локальном хранилище данные чтобы были актуальны
+                comm.saveComments();
+            });
+        });
+    };
+    ;
+    mainComments.prototype.changeRating = function () {
+        document.querySelectorAll('.rating').forEach(function (item) {
+            item.addEventListener("click", function (event) {
+                var btn = event.target.closest('.rating');
+                var indRat = btn.getAttribute('data-index-change');
+                if (btn.classList.contains('btn__rating-plus')) {
+                    comm.comments[indRat].ratingScore++;
+                }
+                ;
+                if (btn.classList.contains('btn__rating-minus')) {
+                    comm.comments[indRat].ratingScore--;
+                }
+                ;
+                document.querySelector(".rating-text-".concat(indRat)).innerText = comm.comments[indRat].ratingScore;
+                comm.saveComments();
+            });
+        });
     };
     ;
     return mainComments;
