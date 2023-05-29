@@ -146,7 +146,9 @@ var mainComments = /** @class */ (function () {
                     comm.comments[indRat].ratingScore--;
                 }
                 ;
-                document.querySelector(".rating-text-".concat(indRat)).innerText = comm.comments[indRat].ratingScore;
+                // document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
+                comm.writeRating = document.querySelector(".rating-text-".concat(indRat));
+                comm.writeRating.innerText = comm.comments[indRat].ratingScore;
                 comm.saveComments();
             });
         });

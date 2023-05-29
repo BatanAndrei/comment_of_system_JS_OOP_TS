@@ -18,7 +18,9 @@ class mainComments {
     ratingScore: number = 0;
     value: Element | null | string = '';
     out: string = '';
-    closest: any;
+    writeRating: any;
+    innerText?: Element | null;
+    
        
     constructor() {
         this.commentBody = document.getElementById('comment-body')
@@ -212,16 +214,19 @@ public toggleHeart() {
 public changeRating() {   
     document.querySelectorAll('.rating').forEach(function(item) {
         item.addEventListener("click", function(event: any) {    
-            const btn = event.target!.closest('.rating');
-            const indRat = btn.getAttribute('data-index-change');
+            const btn: Element | null = event.target!.closest('.rating');
+            const indRat: any = btn!.getAttribute('data-index-change');
 
-            if(btn.classList.contains('btn__rating-plus')){
+            if(btn!.classList.contains('btn__rating-plus')){
                 comm.comments[indRat].ratingScore++;
             };
-            if(btn.classList.contains('btn__rating-minus')){
+            if(btn!.classList.contains('btn__rating-minus')){
                 comm.comments[indRat].ratingScore--;
             };
-            document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
+           // document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
+
+            comm.writeRating = document.querySelector(`.rating-text-${indRat}`);
+            comm.writeRating.innerText = comm.comments[indRat].ratingScore;
             
             comm.saveComments();
         });
