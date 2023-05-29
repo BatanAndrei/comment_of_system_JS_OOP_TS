@@ -386,7 +386,7 @@
     margin: 0px 0px 0px 20px;
 }
 
-.btn__rating-plus {
+.btn__rating-minus {
     cursor: pointer;
     width: 22px;
     height: 22px;
@@ -403,7 +403,7 @@
     color: #918d8d;
 }
 
-.btn__rating-minus {
+.btn__rating-plus {
     cursor: pointer;
     width: 22px;
     height: 22px;

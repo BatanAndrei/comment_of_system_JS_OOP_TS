@@ -1,7 +1,6 @@
 class mainComments {
-    comments: string[] = [];
+    comments: any[] = [];
     comAnswers: string[] = [];
-    
     arrowAnswer: string = '';
     indexArrow: string = '';
     drawAnswer: string = '';
@@ -26,7 +25,6 @@ class mainComments {
         this.commentSend = document.getElementById('comment-send');
         this.comment = this.comment;   
         this.resultComment = document.getElementById('result-comment');
-        
     }
 
 public sending() {
@@ -77,7 +75,7 @@ public localComments() {                                  // отображае�
 public showComments() {
     this.resultComment!.innerHTML = '';
 
-    this.comments.forEach(function(item, index) {
+    this.comments.forEach(function(item: any, index) {
         //её тут объявим
         comm.out = '';
         comm.out += `<div class="image-alex-sent"></div>`;
@@ -85,33 +83,15 @@ public showComments() {
         comm.out += `<div class="text-date">${comm.timeConverter(item.time)}</div>`;
         comm.out += `<p class="text-sent">${item.body}</p>`;
         comm.out += `<div class="toolbar-sent">
-        
                    <button class="button-bordernone btn-answer" data-index-arrow="${index}">
                        <svg class="toolbar-sent_svg-answer" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.004 2.98l-6.99 4.995 6.99 4.977V9.97c1.541-.097 2.921-.413 7.01 3.011-1.34-4.062-3.158-6.526-7.01-7.001v-3z" fill="#918d8d"></path>
                        </svg>
                    </button>
-                   
                    <h3 class="toolbar-sent_text">Ответить</h3>
-
                    <div class="inFavorite ${item.like ? 'toggleHeart' : ''}" data-index="${index}">
                         ${comm.paintHeart(item.like)}
                    </div>
-                   
-
-                   <div class="rating-plus">
-                       <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
-                           <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
-                           <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
-                           </svg>
-                       </button>
-                   </div>
-
-                   
-                   <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScore}</h3>
-                   
-
                    <div class="rating-minus">
                        <button class="button-bordernone rating btn__rating-minus" data-index-change="${index}">
                            <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,10 +100,16 @@ public showComments() {
                        </svg>
                        </button>
                    </div>
-
-
+                   <h3 class="toolbar-sent_text-rating rating-text-${index}">${item.ratingScore}</h3>
+                   <div class="rating-plus">
+                   <button class="button-bordernone rating btn__rating-plus" data-index-change="${index}">
+                       <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <circle opacity="0.1" cx="10" cy="13" r="10" fill="black"/>
+                       <path d="M9.13281 17.169V8.52699H10.8523V17.169H9.13281ZM5.67472 13.7045V11.9851H14.3168V13.7045H5.67472Z" fill="#8AC540"/>
+                       </svg>
+                   </button>
+               </div>
                 </div>
-
                 <div class="block-result-answer answer-field-${index}"></div>
                </div>`; 
        //и тут запишем
@@ -200,7 +186,7 @@ public paintHeart(like: any){
 
 public toggleHeart() {    
     document.querySelectorAll('.inFavorite').forEach(function(item) {
-        item.addEventListener("click", function(event) {
+        item.addEventListener("click", function(event: any) {
             let favoriteBtn: HTMLElement | null = event.target!.closest('.inFavorite');
             favoriteBtn!.classList.toggle("toggleHeart");
             const index: any = favoriteBtn!.getAttribute('data-index');
@@ -225,7 +211,7 @@ public toggleHeart() {
 
 public changeRating() {   
     document.querySelectorAll('.rating').forEach(function(item) {
-        item.addEventListener("click", function(event) {    
+        item.addEventListener("click", function(event: any) {    
             const btn = event.target!.closest('.rating');
             const indRat = btn.getAttribute('data-index-change');
 
@@ -237,15 +223,11 @@ public changeRating() {
             };
             document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
             
-            
             comm.saveComments();
         });
     });
 };
 }
-
-
-
 
 
 let comm = new mainComments();
