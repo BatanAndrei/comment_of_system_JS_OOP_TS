@@ -21,7 +21,6 @@ class mainComments {
     writeRating: any;
     innerText?: Element | null;
     
-       
     constructor() {
         this.commentBody = document.getElementById('comment-body')
         this.commentSend = document.getElementById('comment-send');
@@ -30,7 +29,7 @@ class mainComments {
     }
 
 public sending() {
-    this.commentSend?.addEventListener('click', function() {
+    this.commentSend?.addEventListener('click', function(): void {
         event?.preventDefault();
         comm.commentContent();
     })
@@ -77,7 +76,7 @@ public localComments() {                                  // отображае�
 public showComments() {
     this.resultComment!.innerHTML = '';
 
-    this.comments.forEach(function(item: any, index) {
+    this.comments.forEach(function(item: any, index): void {
         //её тут объявим
         comm.out = '';
         comm.out += `<div class="image-alex-sent"></div>`;
@@ -141,7 +140,7 @@ public timeConverter(UNIX_timestamp: number) {
     return time;
 };
 
-public paintHeart(like: any){
+public paintHeart(like: any): string {
     let htmlHeart: string = ''; 
     if(like){   
         htmlHeart = `<button class="button-bordernone">
@@ -187,8 +186,8 @@ public paintHeart(like: any){
 };
 
 public toggleHeart() {    
-    document.querySelectorAll('.inFavorite').forEach(function(item) {
-        item.addEventListener("click", function(event: any) {
+    document.querySelectorAll('.inFavorite').forEach(function(item): void {
+        item.addEventListener("click", function(event: any): void {
             let favoriteBtn: HTMLElement | null = event.target!.closest('.inFavorite');
             favoriteBtn!.classList.toggle("toggleHeart");
             const index: any = favoriteBtn!.getAttribute('data-index');
@@ -212,8 +211,8 @@ public toggleHeart() {
 };
 
 public changeRating() {   
-    document.querySelectorAll('.rating').forEach(function(item) {
-        item.addEventListener("click", function(event: any) {    
+    document.querySelectorAll('.rating').forEach(function(item): void {
+        item.addEventListener("click", function(event: any): void {    
             const btn: Element | null = event.target!.closest('.rating');
             const indRat: any = btn!.getAttribute('data-index-change');
 
