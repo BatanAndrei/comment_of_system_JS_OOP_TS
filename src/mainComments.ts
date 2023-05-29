@@ -5,7 +5,7 @@ class mainComments {
     arrowAnswer: string = '';
     indexArrow: string = '';
     drawAnswer: string = '';
-    commentBody: Element | null;
+    commentBody: any;
     commentSend: Element | null;
     comment: any;
     answer: string[] = [];
@@ -16,13 +16,12 @@ class mainComments {
     like: boolean = false;
     favoriteOff: string = 'В избранное';
     ratingScore: number = 0;
-    value: string = '';
-    
+    value: Element | null | string = '';
            
     constructor() {
         this.commentBody = document.getElementById('comment-body')
         this.commentSend = document.getElementById('comment-send');
-        this.comment = comm;    
+        this.comment = comm;   
     }
 
 public sending() {
@@ -43,8 +42,10 @@ public commentContent() {
             favoriteOff: 'В избранное',
             ratingScore: 0
         };
-        console.log(this.comment)
 
+        inputF.count.innerText = `Макс. ${inputF.limit} символов`;     // обнуляем при клике счётчик символов
+        inputF.btn.style.backgroundColor = '#dbd7d7';           // обнуляем стиль счётчика
+        this.commentBody.value = '';
 }
 }
 

@@ -36,7 +36,9 @@ var mainComments = /** @class */ (function () {
             favoriteOff: 'В избранное',
             ratingScore: 0
         };
-        console.log(this.comment);
+        inputF.count.innerText = "\u041C\u0430\u043A\u0441. ".concat(inputF.limit, " \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"); // обнуляем при клике счётчик символов
+        inputF.btn.style.backgroundColor = '#dbd7d7'; // обнуляем стиль счётчика
+        this.commentBody.value = '';
     };
     return mainComments;
 }());
