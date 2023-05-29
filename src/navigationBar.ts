@@ -2,11 +2,11 @@ class NavigationBar {
     selectHeader: NodeListOf<Element>;
     selectItem: NodeListOf<Element>;
     selectArrow: Element | null;
-    text?: Element | null;
-    select: Element | null;
+    text?: Element | null
+    select: Element | null
     currentText: any;
-    innerText?: Element | null;
-    parentElement?: Element | null;
+    innerText?: Element | null
+    parentElement?: Element | null
     closest: any;
     classList: any;
 
@@ -18,6 +18,7 @@ class NavigationBar {
         this.text = this.text;
         this.innerText = this.innerText;
         this.currentText = this.currentText;
+        //this.mainComments = new MainComments();
     }
 
     public selectitems() {         // создание селекта
