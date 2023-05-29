@@ -13,6 +13,7 @@ var mainComments = /** @class */ (function () {
         this.favoriteOff = 'В избранное';
         this.ratingScore = 0;
         this.value = '';
+        this.localStorage = '';
         this.commentBody = document.getElementById('comment-body');
         this.commentSend = document.getElementById('comment-send');
         this.comment = comm;
@@ -48,7 +49,13 @@ var mainComments = /** @class */ (function () {
         localStorage.setItem('comments', JSON.stringify(this.comments)); // сохраняем в Local  
     };
     ;
+    mainComments.prototype.localComments = function () {
+        if (localStorage.getItem('comments')) {
+            this.comments = JSON.parse(localStorage.getItem('comments') || '{}');
+        }
+    };
     return mainComments;
 }());
 var comm = new mainComments();
 comm.sending();
+comm.localComments();

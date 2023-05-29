@@ -17,6 +17,7 @@ class mainComments {
     favoriteOff: string = 'В избранное';
     ratingScore: number = 0;
     value: Element | null | string = '';
+    localStorage?: string = '';
            
     constructor() {
         this.commentBody = document.getElementById('comment-body')
@@ -57,9 +58,18 @@ public commentContent() {
 public saveComments() {     
     localStorage.setItem('comments', JSON.stringify(this.comments));                    // сохраняем в Local  
 };
+
+public localComments() {                                  // отображаем из Local
+    if(localStorage.getItem('comments')) {
+        this.comments = JSON.parse(localStorage.getItem('comments') || '{}');
+    }
 }
+}
+
+
 
 let comm = new mainComments();
 comm.sending();
+comm.localComments();
 
 
