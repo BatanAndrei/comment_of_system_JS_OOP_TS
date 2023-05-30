@@ -18,6 +18,7 @@ var MainComments = /** @class */ (function () {
         this.commentSend = document.getElementById('comment-send');
         this.comment = this.comment;
         this.resultComment = document.getElementById('result-comment');
+        this.answertBody = document.getElementById('idAnswer');
     }
     MainComments.prototype.sending = function () {
         var _a;
@@ -47,7 +48,7 @@ var MainComments = /** @class */ (function () {
             comm.toggleHeart();
             comm.changeRating();
             answ.createAnswer();
-            answ.submitAnswer();;
+            answ.submitAnswer();
         }
     };
     MainComments.prototype.saveComments = function () {
