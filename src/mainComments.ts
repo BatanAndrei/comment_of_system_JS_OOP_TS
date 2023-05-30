@@ -28,7 +28,7 @@ class mainComments {
         this.resultComment = document.getElementById('result-comment');
     }
 
-public sending() {
+public sending() {                                                   // создаём отправку, отображение и сохранение комментов
     this.commentSend?.addEventListener('click', function(): void {
         event?.preventDefault();
         comm.commentContent();
@@ -73,11 +73,10 @@ public localComments() {                                  // отображае�
     comm.changeRating();
 }
 
-public showComments() {
+public showComments() {                          // рисуем отправленный коммент
     this.resultComment!.innerHTML = '';
 
     this.comments.forEach(function(item: any, index): void {
-        //её тут объявим
         comm.out = '';
         comm.out += `<div class="image-alex-sent"></div>`;
         comm.out += `<div class="user-sent">${item.userSend}</div>`;
@@ -113,18 +112,14 @@ public showComments() {
                 </div>
                 <div class="block-result-answer answer-field-${index}"></div>
                </div>`; 
-       //и тут запишем
+       
        comm.resultComment!.innerHTML += comm.out;
-        //как отрисовали ответ , то теперь имеем блок для отрисовки ответов
-        //вызываем функцию отрисовки и обязательно передаем индекс комента
-
-
+       
      /*    answerContentDraw(index);
         toggleHeartAnswer(index);
         changeRatingAnswer(index); */
     
     });
-    // resultComment.innerHTML = out;
 };
 
 public timeConverter(UNIX_timestamp: number) {
@@ -140,7 +135,7 @@ public timeConverter(UNIX_timestamp: number) {
     return time;
 };
 
-public paintHeart(like: any): string {
+public paintHeart(like: any): string {                 //отрисовку в зависимости от Like в отдельную функцию, ею всегда и будем пользоваться
     let htmlHeart: string = ''; 
     if(like){   
         htmlHeart = `<button class="button-bordernone">
@@ -185,7 +180,7 @@ public paintHeart(like: any): string {
     return htmlHeart;
 };
 
-public toggleHeart() {    
+public toggleHeart() {                                                       // вешаем клик на ЛАЙК "В избранное" комментов
     document.querySelectorAll('.inFavorite').forEach(function(item): void {
         item.addEventListener("click", function(event: any): void {
             let favoriteBtn: HTMLElement | null = event.target!.closest('.inFavorite');
@@ -210,7 +205,7 @@ public toggleHeart() {
     });
 };
 
-public changeRating() {   
+public changeRating() {                                                     // вешаем клики на РЕЙТИНГ комменты
     document.querySelectorAll('.rating').forEach(function(item): void {
         item.addEventListener("click", function(event: any): void {    
             const btn: Element | null = event.target!.closest('.rating');
@@ -222,8 +217,7 @@ public changeRating() {
             if(btn!.classList.contains('btn__rating-minus')){
                 comm.comments[indRat].ratingScore--;
             };
-           // document.querySelector(`.rating-text-${indRat}`)!.innerText = comm.comments[indRat].ratingScore;
-
+           
             comm.writeRating = document.querySelector(`.rating-text-${indRat}`);
             comm.writeRating.innerText = comm.comments[indRat].ratingScore;
             

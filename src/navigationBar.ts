@@ -18,7 +18,6 @@ class NavigationBar {
         this.text = this.text;
         this.innerText = this.innerText;
         this.currentText = this.currentText;
-        //this.mainComments = new MainComments();
     }
 
     public selectitems() {         // создание селекта

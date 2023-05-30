@@ -16,7 +16,7 @@ class InputField {
         this.limit = 1000; 
     };
 
-    public validateTextarea() {
+    public validateTextarea() {                              // счётчик символов коммента 
         this.textarea.addEventListener('input', () => {
         this.textlength = this.textarea.value.length;
         this.count.innerText = `${this.textlength}/${this.limit}`;

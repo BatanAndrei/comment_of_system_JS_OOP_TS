@@ -9,10 +9,6 @@ var InputField = /** @class */ (function () {
         this.limit = 1000;
     }
     ;
-    /*  public auto_grow(element: any): void {     //увеличиваем размер поля ввода комментов
-         element.style.height = "5px";
-         element.style.height = (element.scrollHeight)+"px";
-     }; */
     InputField.prototype.validateTextarea = function () {
         var _this = this;
         this.textarea.addEventListener('input', function () {
@@ -47,4 +43,3 @@ var InputField = /** @class */ (function () {
 }());
 var inputF = new InputField();
 inputF.validateTextarea();
-//inputF.auto_grow(this);

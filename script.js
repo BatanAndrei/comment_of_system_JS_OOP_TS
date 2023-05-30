@@ -366,7 +366,7 @@ function changeRating() {
 };
      
 
-// вешаем клики на РЕЙТИНГ комменты
+// вешаем клики на РЕЙТИНГ ответа
 
 function changeRatingAnswer(index) {   
     document.querySelectorAll('.rating-answer').forEach(function(item) {
