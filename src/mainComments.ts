@@ -60,6 +60,7 @@ public commentContent() {
             comm.toggleHeart();
             comm.changeRating();
             answ.createAnswer();
+            answ.submitAnswer();
         }
     }
 
@@ -75,6 +76,7 @@ public localComments() {                                  // отображае�
     comm.toggleHeart();
     comm.changeRating();
     answ.createAnswer();
+    answ.submitAnswer();
 }
 
 public showComments() {                          // рисуем отправленный коммент

@@ -47,6 +47,7 @@ var MainComments = /** @class */ (function () {
             comm.toggleHeart();
             comm.changeRating();
             answ.createAnswer();
+            answ.submitAnswer();;
         }
     };
     MainComments.prototype.saveComments = function () {
@@ -61,6 +62,7 @@ var MainComments = /** @class */ (function () {
         comm.toggleHeart();
         comm.changeRating();
         answ.createAnswer();
+        answ.submitAnswer();
     };
     MainComments.prototype.showComments = function () {
         this.resultComment.innerHTML = '';
