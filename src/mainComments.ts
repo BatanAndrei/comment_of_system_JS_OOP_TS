@@ -1,9 +1,9 @@
 class MainComments {
     comments: any[] = [];
     comAnswers: string[] = [];
-    arrowAnswer: string = '';
-    indexArrow: string = '';
-    drawAnswer: string = '';
+    arrowAnswer: any = '';
+    indexArrow: HTMLElement | string = '';
+    drawAnswer: Element | string = '';
     commentBody: any;
     commentSend: Element | null;
     resultComment: Element | null;
@@ -20,6 +20,7 @@ class MainComments {
     out: string = '';
     writeRating: any;
     innerText?: Element | null;
+    
     
     constructor() {
         this.commentBody = document.getElementById('comment-body')
@@ -57,6 +58,7 @@ public commentContent() {
             comm.saveComments();
             comm.toggleHeart();
             comm.changeRating();
+            answ.createAnswer();
         }
     }
 
@@ -71,6 +73,7 @@ public localComments() {                                  // отображае�
     comm.showComments();
     comm.toggleHeart();
     comm.changeRating();
+    answ.createAnswer();
 }
 
 public showComments() {                          // рисуем отправленный коммент
