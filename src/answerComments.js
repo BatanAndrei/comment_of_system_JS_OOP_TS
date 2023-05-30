@@ -16,7 +16,9 @@ var __extends = (this && this.__extends) || (function () {
 var AnswerComments = /** @class */ (function (_super) {
     __extends(AnswerComments, _super);
     function AnswerComments() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.answertBody = document.getElementById('idAnswer');
+        return _this;
     }
     AnswerComments.prototype.createAnswer = function () {
         document.querySelectorAll('.btn-answer').forEach(function (item) {
@@ -65,3 +67,4 @@ var AnswerComments = /** @class */ (function (_super) {
 }(MainComments));
 var answ = new AnswerComments();
 answ.createAnswer();
+answ.submitAnswer();

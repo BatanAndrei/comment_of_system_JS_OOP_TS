@@ -21,12 +21,12 @@ class MainComments {
     writeRating: any;
     innerText?: Element | null;
     
-    
     constructor() {
         this.commentBody = document.getElementById('comment-body')
         this.commentSend = document.getElementById('comment-send');
         this.comment = this.comment;   
         this.resultComment = document.getElementById('result-comment');
+        
     }
 
 public sending() {                                                   // создаём отправку, отображение и сохранение комментов
@@ -39,7 +39,7 @@ public sending() {                                                   // созд
 public commentContent() {
         this.comment = {
             answer: [],
-            body: this.commentBody?.value,
+            body: this.commentBody.value,
             time: Math.floor(Date.now() / 1000),
             userSend: 'Максим Авдеенко',
             photoSend: './images/Max.png',

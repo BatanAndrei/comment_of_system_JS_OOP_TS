@@ -27,10 +27,9 @@ var MainComments = /** @class */ (function () {
         });
     };
     MainComments.prototype.commentContent = function () {
-        var _a;
         this.comment = {
             answer: [],
-            body: (_a = this.commentBody) === null || _a === void 0 ? void 0 : _a.value,
+            body: this.commentBody.value,
             time: Math.floor(Date.now() / 1000),
             userSend: 'Максим Авдеенко',
             photoSend: './images/Max.png',

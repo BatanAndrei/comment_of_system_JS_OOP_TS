@@ -1,7 +1,9 @@
 class AnswerComments extends MainComments {
     innerHTML?: HTMLElement;
+    answertBody: any;
     constructor() {
         super()
+        this.answertBody = document.getElementById('idAnswer');
     }
 
     public createAnswer() {
@@ -58,3 +60,4 @@ class AnswerComments extends MainComments {
 
 let answ = new AnswerComments();
 answ.createAnswer();
+answ.submitAnswer();
