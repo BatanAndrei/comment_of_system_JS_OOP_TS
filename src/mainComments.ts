@@ -1,4 +1,4 @@
-class mainComments {
+class MainComments {
     comments: any[] = [];
     comAnswers: string[] = [];
     arrowAnswer: string = '';
@@ -228,7 +228,7 @@ public changeRating() {                                                     // Ð
 }
 
 
-let comm = new mainComments();
+let comm = new MainComments();
 comm.sending();
 comm.localComments();
 
