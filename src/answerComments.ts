@@ -1,9 +1,8 @@
 class AnswerComments extends MainComments {
     innerHTML?: HTMLElement;
-    answertBody: any;
     constructor() {
         super()
-        this.answertBody = document.getElementById('idAnswer');
+
     }
 
     public createAnswer() {
@@ -33,7 +32,7 @@ class AnswerComments extends MainComments {
                 let answertBody = document.getElementById('idAnswer');
     
                 let comAnswer = {
-                    bodyAnswer: answertBody.value,
+                    bodyAnswer: comm.answertBody.value,
                     timeAnswer: Math.floor(Date.now() / 1000),
                     userSendAnswer: 'Максим Авдеенко',
                     userAnswer: 'Джунбокс3000',

@@ -20,13 +20,14 @@ class MainComments {
     out: string = '';
     writeRating: any;
     innerText?: Element | null;
+    answertBody: any;
     
     constructor() {
         this.commentBody = document.getElementById('comment-body')
         this.commentSend = document.getElementById('comment-send');
         this.comment = this.comment;   
         this.resultComment = document.getElementById('result-comment');
-        
+        this.answertBody = document.getElementById('idAnswer');
     }
 
 public sending() {                                                   // создаём отправку, отображение и сохранение комментов
