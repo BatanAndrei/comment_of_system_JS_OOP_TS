@@ -24,6 +24,7 @@ class NavigationBar {
         this.selectHeader.forEach(item => {
             item.addEventListener('click', this.selectToggle); // переключаем класс .is-active у .header-tabs_select показывая .header-tabs_select-body.
         });
+        
     
         this.selectItem.forEach(item => { //нажимаем на пункты .header-tabs_select-body и записываем в .header-tabs_select-current.
             item.addEventListener('click', this.selectChoose);
